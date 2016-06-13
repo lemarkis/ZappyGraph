@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ResourceCompile Include="ZappyGraph.rc" />
+    <Image Include="ZappyGraph.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\Framework\AdvancedOgreFramework.cpp" />
+    <ClCompile Include="source\Framework\AppStateManager.cpp" />
+    <ClCompile Include="source\Framework\DotSceneLoader.cpp" />
+    <ClCompile Include="source\State\GameState.cpp" />
+    <ClCompile Include="source\State\MenuState.cpp" />
+    <ClCompile Include="source\State\PauseState.cpp" />
+    <ClCompile Include="ZappyGraph.cpp" />
+    <ClCompile Include="source\Object\AObject.cpp" />
+    <ClCompile Include="source\Object\Character.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AdvancedOgreFramework.hpp" />
+    <ClInclude Include="include\AppState.hpp" />
+    <ClInclude Include="include\AppStateManager.hpp" />
+    <ClInclude Include="include\DotSceneLoader.hpp" />
+    <ClInclude Include="include\GameState.hpp" />
+    <ClInclude Include="include\MenuState.hpp" />
+    <ClInclude Include="include\PauseState.hpp" />
+    <ClInclude Include="include\rapidxml.hpp" />
+    <ClInclude Include="include\ZappyGraph.hpp" />
+    <ClInclude Include="include\AObject.hpp" />
+    <ClInclude Include="include\Character.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration.props" />
+  </ItemGroup>
+</Project>
