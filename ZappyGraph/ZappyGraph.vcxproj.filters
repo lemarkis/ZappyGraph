@@ -22,6 +22,7 @@
     <ClCompile Include="Object\Gear\Thystame.cpp" />
     <ClCompile Include="Object\Gear\AGear.cpp" />
     <ClCompile Include="Object\Ground\Ground.cpp" />
+    <ClCompile Include="Map\Cell.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Object\Gear\AGear.hpp" />
     <ClInclude Include="Object\ObjectFactory.hpp" />
     <ClInclude Include="Object\Ground\Ground.hpp" />
+    <ClInclude Include="Map\Cell.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration.props" />

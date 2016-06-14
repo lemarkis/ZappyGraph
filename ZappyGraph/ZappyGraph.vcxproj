@@ -340,6 +340,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <Image Include="ZappyGraph.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Map\Cell.cpp" />
     <ClCompile Include="Object\AObject.cpp" />
     <ClCompile Include="Object\Gear\AGear.cpp" />
     <ClCompile Include="Object\Character\Character.cpp" />
@@ -360,6 +361,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
+    <ClInclude Include="Map\Cell.hpp" />
     <ClInclude Include="Object\AObject.hpp" />
     <ClInclude Include="Framework\AppState.hpp" />
     <ClInclude Include="Framework\AppStateManager.hpp" />
