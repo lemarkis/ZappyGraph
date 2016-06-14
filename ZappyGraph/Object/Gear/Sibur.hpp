@@ -1,9 +1,9 @@
 #ifndef SIBUR_HPP
 #define SIBUR_HPP
 
-#include "ARock.hpp"
+#include "AGear.hpp"
 
-class Sibur : public ARock
+class Sibur : public AGear
 {
 public:
 	Sibur(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);

@@ -1,9 +1,9 @@
 #ifndef LINEMATE_HPP
 #define LINEMATE_HPP
 
-#include "ARock.hpp"
+#include "AGear.hpp"
 
-class Linemate : public ARock
+class Linemate : public AGear
 {
 public:
 	Linemate(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);

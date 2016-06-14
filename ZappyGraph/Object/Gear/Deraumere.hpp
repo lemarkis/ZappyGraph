@@ -1,9 +1,9 @@
 #ifndef DERAUMERE_HPP
 #define DERAUMERE_HPP
 
-#include "ARock.hpp"
+#include "AGear.hpp"
 
-class Deraumere : public ARock
+class Deraumere : public AGear
 {
 public:
 	Deraumere(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);

@@ -5,20 +5,10 @@
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
-#include "Framework\AppState.hpp"
-
-#include "Framework\DotSceneLoader.hpp"
-
 #include <OgreSubEntity.h>
 #include <OgreMaterialManager.h>
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
-enum QueryFlags
-{
-	OGRE_HEAD_MASK	= 1<<0,
-    CUBE_MASK		= 1<<1
-};
+#include "Framework\AppState.hpp"
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 

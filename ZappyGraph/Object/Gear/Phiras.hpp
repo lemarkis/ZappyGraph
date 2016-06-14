@@ -1,9 +1,9 @@
 #ifndef PHIRAS_HPP
 #define PHIRAS_HPP
 
-#include "ARock.hpp"
+#include "AGear.hpp"
 
-class Phiras : public ARock
+class Phiras : public AGear
 {
 public:
 	Phiras(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
