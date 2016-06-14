@@ -1,16 +1,6 @@
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #include "AdvancedOgreFramework.hpp"
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
-using namespace Ogre;
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 template<> OgreFramework* Ogre::Singleton<OgreFramework>::msSingleton = 0;
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 OgreFramework::OgreFramework()
 {
@@ -26,8 +16,6 @@ OgreFramework::OgreFramework()
     m_pTrayMgr          = 0;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 OgreFramework::~OgreFramework()
 {
     OgreFramework::getSingletonPtr()->m_pLog->logMessage("Shutdown OGRE...");
@@ -35,8 +23,6 @@ OgreFramework::~OgreFramework()
     if(m_pInputMgr)		OIS::InputManager::destroyInputSystem(m_pInputMgr);
     if(m_pRoot)			delete m_pRoot;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListener, OIS::MouseListener *pMouseListener)
 {
@@ -52,7 +38,7 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     m_pRenderWnd = m_pRoot->initialise(true, wndTitle);
 
     m_pViewport = m_pRenderWnd->addViewport(0);
-    m_pViewport->setBackgroundColour(ColourValue(0.5f, 0.5f, 0.5f, 1.0f));
+    m_pViewport->setBackgroundColour(Ogre::ColourValue(0.5f, 0.5f, 0.5f, 1.0f));
 
     m_pViewport->setCamera(0);
 
@@ -115,8 +101,6 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
 {
     if(m_pKeyboard->isKeyDown(OIS::KC_SYSRQ))
@@ -142,38 +126,26 @@ bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool OgreFramework::keyReleased(const OIS::KeyEvent &keyEventRef)
 {
     return true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 bool OgreFramework::mouseMoved(const OIS::MouseEvent &evt)
 {
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool OgreFramework::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
     return true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 bool OgreFramework::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void OgreFramework::updateOgre(double timeSinceLastFrame)
 {
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||

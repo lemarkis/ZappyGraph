@@ -1,13 +1,7 @@
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #ifndef APP_STATE_MANAGER_HPP
 #define APP_STATE_MANAGER_HPP
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #include "AppState.hpp"
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 class AppStateManager : public AppStateListener
 {
@@ -41,8 +35,4 @@ protected:
 	bool						m_bShutdown;
 };
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #endif
-
-//|||||||||||||||||||||||||||||||||||||||||||||||

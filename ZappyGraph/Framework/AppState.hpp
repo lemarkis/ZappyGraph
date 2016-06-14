@@ -1,15 +1,9 @@
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #ifndef APP_STATE_HPP
 #define APP_STATE_HPP
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 #include "AdvancedOgreFramework.hpp"
 
 class AppState;
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 class AppStateListener
 {
@@ -27,8 +21,6 @@ public:
 	virtual void		shutdown() = 0;
     virtual void        popAllAndPushAppState(AppState* state) = 0;
 };
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 class AppState : public OIS::KeyListener, public OIS::MouseListener, public OgreBites::SdkTrayListener
 {
@@ -60,8 +52,6 @@ protected:
     Ogre::FrameEvent            m_FrameEvent;
 };
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #define DECLARE_APPSTATE_CLASS(T)										\
 static void create(AppStateListener* parent, const Ogre::String name)	\
 {																		\
@@ -70,8 +60,4 @@ static void create(AppStateListener* parent, const Ogre::String name)	\
 	parent->manageAppState(name, myAppState);							\
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #endif
-
-//|||||||||||||||||||||||||||||||||||||||||||||||

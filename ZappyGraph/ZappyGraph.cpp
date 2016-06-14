@@ -1,27 +1,19 @@
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #include "ZappyGraph.hpp"
 
 #include "State\MenuState.hpp"
 #include "State\GameState.hpp"
 #include "State\PauseState.hpp"
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 ZappyGraph::ZappyGraph()
 {
 	m_pAppStateManager = 0;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 ZappyGraph::~ZappyGraph()
 {
 	delete m_pAppStateManager;
     delete OgreFramework::getSingletonPtr();
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void ZappyGraph::startZappyGraphicalClient()
 {
@@ -39,5 +31,3 @@ void ZappyGraph::startZappyGraphicalClient()
 
 	m_pAppStateManager->start(m_pAppStateManager->findByName("MenuState"));
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||

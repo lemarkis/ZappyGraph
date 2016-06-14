@@ -13,4 +13,4 @@ private:
 
 };
 
-#endif // !Deraumere_HPP
+#endif // !DERAUMERE_HPP

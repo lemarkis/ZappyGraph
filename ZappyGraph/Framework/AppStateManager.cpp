@@ -1,17 +1,11 @@
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #include "AppStateManager.hpp"
 
 #include <OgreWindowEventUtilities.h>
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 AppStateManager::AppStateManager()
 {
 	m_bShutdown = false;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 AppStateManager::~AppStateManager()
 {
@@ -31,8 +25,6 @@ AppStateManager::~AppStateManager()
 	}
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void AppStateManager::manageAppState(Ogre::String stateName, AppState* state)
 {
 	try
@@ -49,8 +41,6 @@ void AppStateManager::manageAppState(Ogre::String stateName, AppState* state)
 	}
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 AppState* AppStateManager::findByName(Ogre::String stateName)
 {
 	std::vector<state_info>::iterator itr;
@@ -63,8 +53,6 @@ AppState* AppStateManager::findByName(Ogre::String stateName)
 
 	return 0;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void AppStateManager::start(AppState* state)
 {
@@ -106,8 +94,6 @@ void AppStateManager::start(AppState* state)
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage("Main loop quit");
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void AppStateManager::changeAppState(AppState* state)
 {
 	if(!m_ActiveStateStack.empty())
@@ -120,8 +106,6 @@ void AppStateManager::changeAppState(AppState* state)
 	init(state);
 	m_ActiveStateStack.back()->enter();
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 bool AppStateManager::pushAppState(AppState* state)
 {
@@ -137,8 +121,6 @@ bool AppStateManager::pushAppState(AppState* state)
 
 	return true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void AppStateManager::popAppState()
 {
@@ -157,8 +139,6 @@ void AppStateManager::popAppState()
 		shutdown();
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void AppStateManager::popAllAndPushAppState(AppState* state)
 {
     while(!m_ActiveStateStack.empty())
@@ -169,8 +149,6 @@ void AppStateManager::popAllAndPushAppState(AppState* state)
 
     pushAppState(state);
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void AppStateManager::pauseAppState()
 {
@@ -186,14 +164,10 @@ void AppStateManager::pauseAppState()
 	}
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void AppStateManager::shutdown()
 {
 	m_bShutdown = true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void AppStateManager::init(AppState* state)
 {
@@ -203,5 +177,3 @@ void AppStateManager::init(AppState* state)
 
 	OgreFramework::getSingletonPtr()->m_pRenderWnd->resetStatistics();
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
