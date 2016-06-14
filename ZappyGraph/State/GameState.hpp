@@ -36,6 +36,8 @@ public:
 
 private:
 	bool quit;
+	Ogre::FrameEvent frameEvent;
+
 	Ogre::SceneManager * sceneMgr;
 	Ogre::Camera * camera;
 

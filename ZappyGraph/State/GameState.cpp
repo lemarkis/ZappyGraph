@@ -2,6 +2,8 @@
 
 GameState::GameState()
 {
+	quit = false;
+	frameEvent = Ogre::FrameEvent();
 }
 
 void GameState::enter()

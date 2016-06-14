@@ -1,12 +1,4 @@
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 #include "MenuState.hpp"
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
-using namespace Ogre;
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 MenuState::MenuState()
 {
@@ -14,24 +6,22 @@ MenuState::MenuState()
     m_FrameEvent    = Ogre::FrameEvent();
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void MenuState::enter()
 {
     OgreFramework::getSingletonPtr()->m_pLog->logMessage("Entering MenuState...");
 
-    m_pSceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->createSceneManager(ST_GENERIC, "MenuSceneMgr");
+    m_pSceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->createSceneManager(Ogre::ST_GENERIC, "MenuSceneMgr");
     m_pSceneMgr->setAmbientLight(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
     m_pSceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
 
     m_pCamera = m_pSceneMgr->createCamera("MenuCam");
-    m_pCamera->setPosition(Vector3(0, 25, -50));
-    m_pCamera->lookAt(Vector3(0, 0, 0));
+    m_pCamera->setPosition(Ogre::Vector3(0, 25, -50));
+    m_pCamera->lookAt(Ogre::Vector3(0, 0, 0));
     m_pCamera->setNearClipDistance(1);
 
-    m_pCamera->setAspectRatio(Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) /
-        Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()));
+    m_pCamera->setAspectRatio(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) /
+        Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()));
 
     OgreFramework::getSingletonPtr()->m_pViewport->setCamera(m_pCamera);
 
@@ -46,13 +36,9 @@ void MenuState::enter()
     createScene();
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void MenuState::createScene()
 {
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void MenuState::exit()
 {
@@ -67,8 +53,6 @@ void MenuState::exit()
     OgreFramework::getSingletonPtr()->m_pTrayMgr->setListener(0);
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool MenuState::keyPressed(const OIS::KeyEvent &keyEventRef)
 {
     if(OgreFramework::getSingletonPtr()->m_pKeyboard->isKeyDown(OIS::KC_ESCAPE))
@@ -81,15 +65,11 @@ bool MenuState::keyPressed(const OIS::KeyEvent &keyEventRef)
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool MenuState::keyReleased(const OIS::KeyEvent &keyEventRef)
 {
     OgreFramework::getSingletonPtr()->keyReleased(keyEventRef);
     return true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 bool MenuState::mouseMoved(const OIS::MouseEvent &evt)
 {
@@ -97,23 +77,17 @@ bool MenuState::mouseMoved(const OIS::MouseEvent &evt)
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool MenuState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
     if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseDown(evt, id)) return true;
     return true;
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 bool MenuState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
     if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseUp(evt, id)) return true;
     return true;
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
 
 void MenuState::update(double timeSinceLastFrame)
 {
@@ -127,8 +101,6 @@ void MenuState::update(double timeSinceLastFrame)
     }
 }
 
-//|||||||||||||||||||||||||||||||||||||||||||||||
-
 void MenuState::buttonHit(OgreBites::Button *button)
 {
     if(button->getName() == "ExitBtn")
@@ -136,5 +108,3 @@ void MenuState::buttonHit(OgreBites::Button *button)
     else if(button->getName() == "EnterBtn")
         changeAppState(findByName("GameState"));
 }
-
-//|||||||||||||||||||||||||||||||||||||||||||||||
