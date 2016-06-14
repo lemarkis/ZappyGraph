@@ -2,9 +2,9 @@
 
 #include "ZappyGraph.hpp"
 
-#include "MenuState.hpp"
-#include "GameState.hpp"
-#include "PauseState.hpp"
+#include "State\MenuState.hpp"
+#include "State\GameState.hpp"
+#include "State\PauseState.hpp"
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 

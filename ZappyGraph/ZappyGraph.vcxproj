@@ -105,8 +105,9 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,8 +163,9 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -221,7 +223,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -282,7 +284,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
@@ -338,29 +340,40 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <Image Include="ZappyGraph.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\Object\AObject.cpp" />
-    <ClCompile Include="source\Object\Character.cpp" />
+    <ClCompile Include="Object\AObject.cpp" />
+    <ClCompile Include="Object\Rock\ARock.cpp" />
+    <ClCompile Include="Object\Character\Character.cpp" />
+    <ClCompile Include="Object\Rock\Deraumere.cpp" />
+    <ClCompile Include="Object\Rock\Linemate.cpp" />
+    <ClCompile Include="Object\Rock\Mendiane.cpp" />
+    <ClCompile Include="Object\Rock\Phiras.cpp" />
+    <ClCompile Include="Object\Rock\Sibur.cpp" />
+    <ClCompile Include="Object\Rock\Thystame.cpp" />
     <ClCompile Include="ZappyGraph.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\Framework\AdvancedOgreFramework.cpp" />
-    <ClCompile Include="source\Framework\AppStateManager.cpp" />
-    <ClCompile Include="source\Framework\DotSceneLoader.cpp" />
-    <ClCompile Include="source\State\GameState.cpp" />
-    <ClCompile Include="source\State\MenuState.cpp" />
-    <ClCompile Include="source\State\PauseState.cpp" />
+    <ClCompile Include="Framework\AdvancedOgreFramework.cpp" />
+    <ClCompile Include="Framework\AppStateManager.cpp" />
+    <ClCompile Include="State\GameState.cpp" />
+    <ClCompile Include="State\MenuState.cpp" />
+    <ClCompile Include="State\PauseState.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\AdvancedOgreFramework.hpp" />
-    <ClInclude Include="include\AObject.hpp" />
-    <ClInclude Include="include\AppState.hpp" />
-    <ClInclude Include="include\AppStateManager.hpp" />
-    <ClInclude Include="include\Character.hpp" />
-    <ClInclude Include="include\ZappyGraph.hpp" />
-    <ClInclude Include="include\DotSceneLoader.hpp" />
-    <ClInclude Include="include\GameState.hpp" />
-    <ClInclude Include="include\MenuState.hpp" />
-    <ClInclude Include="include\PauseState.hpp" />
-    <ClInclude Include="include\rapidxml.hpp" />
+    <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
+    <ClInclude Include="Object\AObject.hpp" />
+    <ClInclude Include="Framework\AppState.hpp" />
+    <ClInclude Include="Framework\AppStateManager.hpp" />
+    <ClInclude Include="Object\Rock\ARock.hpp" />
+    <ClInclude Include="Object\Character\Character.hpp" />
+    <ClInclude Include="Object\Rock\Deraumere.hpp" />
+    <ClInclude Include="Object\Rock\Linemate.hpp" />
+    <ClInclude Include="Object\Rock\Mendiane.hpp" />
+    <ClInclude Include="Object\Rock\Phiras.hpp" />
+    <ClInclude Include="Object\Rock\Sibur.hpp" />
+    <ClInclude Include="Object\Rock\Thystame.hpp" />
+    <ClInclude Include="ZappyGraph.hpp" />
+    <ClInclude Include="State\GameState.hpp" />
+    <ClInclude Include="State\MenuState.hpp" />
+    <ClInclude Include="State\PauseState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration.props" />

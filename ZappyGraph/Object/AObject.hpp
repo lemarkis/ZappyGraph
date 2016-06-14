@@ -6,7 +6,6 @@
 class AObject
 {
 public:
-	AObject(Ogre::String pName);
 	virtual ~AObject();
 
 	virtual Ogre::Entity * getEntity() const;
@@ -14,6 +13,8 @@ public:
 	virtual Ogre::String const & getName() const;
 
 protected:
+	AObject(Ogre::String pName);
+
 	Ogre::Entity * entity;
 	Ogre::SceneNode * node;
 	Ogre::String const name;

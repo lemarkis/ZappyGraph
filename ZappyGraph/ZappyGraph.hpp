@@ -5,8 +5,8 @@
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
-#include "AdvancedOgreFramework.hpp"
-#include "AppStateManager.hpp"
+#include "Framework\AdvancedOgreFramework.hpp"
+#include "Framework\AppStateManager.hpp"
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 

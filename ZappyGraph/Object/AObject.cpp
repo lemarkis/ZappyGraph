@@ -1,6 +1,6 @@
 #include "AObject.hpp"
 
-AObject::AObject(Ogre::String pName): name(pName)
+AObject::AObject(Ogre::String pName): name(pName), node(nullptr), entity(nullptr)
 {
 }
 
