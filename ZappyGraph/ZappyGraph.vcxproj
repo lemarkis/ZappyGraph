@@ -106,8 +106,8 @@
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir);$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -117,41 +117,20 @@
     </Link>
     <PostBuildEvent>
       <Message>Copy runtime files</Message>
-      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
-set pluginpostfix=
-if "$(Configuration)"=="Debug" set pluginpostfix=_d
-set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
-echo # Defines plugins to load&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugin folder&gt;&gt;%plugincfg%
-echo PluginFolder=.&gt;&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugins&gt;&gt;%plugincfg%
-echo Plugin=RenderSystem_Direct3D9%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
-echo [General]&gt;%resourcescfg%
-echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
-echo.&gt;&gt;%resourcescfg%
-echo [Essential]&gt;&gt;%resourcescfg%
-echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+      <Command>if not exist $(TargetDir)\OgreMain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgrePaging*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreProperty*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreRTShaderSystem*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreTerrain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreVolume*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+if not exist $(TargetDir)\OIS*.* copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_BSPSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeZone*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_ParticleFX*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_PCZSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\RenderSystem_Direct3D9*.* copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -164,8 +143,8 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>$(ProjectDir);$(OGRE_HOME)\include\OGRE;$(OGRE_HOME)\include\OGRE\Paging;$(OGRE_HOME)\include\OGRE\Property;$(OGRE_HOME)\include\OGRE\RTShaderSystem;$(OGRE_HOME)\include\OGRE\Terrain;$(OGRE_HOME)\include\OGRE\Volume;$(OGRE_HOME)\include\OIS;$(OGRE_HOME)\include\OGRE\Overlay;$(BOOST_HOME);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
+      <MinimalRebuild>true</MinimalRebuild>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -175,41 +154,20 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     </Link>
     <PostBuildEvent>
       <Message>Copy runtime files</Message>
-      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
-set pluginpostfix=
-if "$(Configuration)"=="Debug" set pluginpostfix=_d
-set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
-echo # Defines plugins to load&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugin folder&gt;&gt;%plugincfg%
-echo PluginFolder=.&gt;&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugins&gt;&gt;%plugincfg%
-echo Plugin=RenderSystem_Direct3D9%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
-echo [General]&gt;%resourcescfg%
-echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
-echo.&gt;&gt;%resourcescfg%
-echo [Essential]&gt;&gt;%resourcescfg%
-echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+      <Command>if not exist $(TargetDir)\OgreMain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgrePaging*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreProperty*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreRTShaderSystem*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreTerrain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreVolume*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+if not exist $(TargetDir)\OIS*.* copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_BSPSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeZone*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_ParticleFX*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_PCZSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\RenderSystem_Direct3D9*.* copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -236,41 +194,20 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     </Link>
     <PostBuildEvent>
       <Message>Copy runtime files</Message>
-      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
-set pluginpostfix=
-if "$(Configuration)"=="Debug" set pluginpostfix=_d
-set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
-echo # Defines plugins to load&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugin folder&gt;&gt;%plugincfg%
-echo PluginFolder=.&gt;&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugins&gt;&gt;%plugincfg%
-echo Plugin=RenderSystem_Direct3D9%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
-echo [General]&gt;%resourcescfg%
-echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
-echo.&gt;&gt;%resourcescfg%
-echo [Essential]&gt;&gt;%resourcescfg%
-echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+      <Command>if not exist $(TargetDir)\OgreMain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgrePaging*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreProperty*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreRTShaderSystem*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreTerrain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreVolume*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+if not exist $(TargetDir)\OIS*.* copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_BSPSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeZone*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_ParticleFX*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_PCZSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\RenderSystem_Direct3D9*.* copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -297,41 +234,20 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     </Link>
     <PostBuildEvent>
       <Message>Copy runtime files</Message>
-      <Command>copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
-copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
-set pluginpostfix=
-if "$(Configuration)"=="Debug" set pluginpostfix=_d
-set plugincfg=$(TargetDir)\plugins%pluginpostfix%.cfg
-echo # Defines plugins to load&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugin folder&gt;&gt;%plugincfg%
-echo PluginFolder=.&gt;&gt;%plugincfg%
-echo.&gt;&gt;%plugincfg%
-echo # Define plugins&gt;&gt;%plugincfg%
-echo Plugin=RenderSystem_Direct3D9%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_ParticleFX%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_BSPSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_PCZSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeZone%pluginpostfix%&gt;&gt;%plugincfg%
-echo Plugin=Plugin_OctreeSceneManager%pluginpostfix%&gt;&gt;%plugincfg%
-set resourcescfg=$(TargetDir)\resources%pluginpostfix%.cfg
-echo [General]&gt;%resourcescfg%
-echo FileSystem=$(OGRE_HOME)\Media&gt;&gt;%resourcescfg%
-echo.&gt;&gt;%resourcescfg%
-echo [Essential]&gt;&gt;%resourcescfg%
-echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
+      <Command>if not exist $(TargetDir)\OgreMain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreMain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgrePaging*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgrePaging*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreProperty*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreProperty*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreRTShaderSystem*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreRTShaderSystem*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreTerrain*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreTerrain*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreVolume*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreVolume*.* $(TargetDir) /y
+if not exist $(TargetDir)\OIS*.* copy $(OGRE_HOME)\bin\$(Configuration)\OIS*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_BSPSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_BSPSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_OctreeZone*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_OctreeZone*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_ParticleFX*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_ParticleFX*.* $(TargetDir) /y
+if not exist $(TargetDir)\Plugin_PCZSceneManager*.* copy $(OGRE_HOME)\bin\$(Configuration)\Plugin_PCZSceneManager*.* $(TargetDir) /y
+if not exist $(TargetDir)\RenderSystem_Direct3D9*.* copy $(OGRE_HOME)\bin\$(Configuration)\RenderSystem_Direct3D9*.* $(TargetDir) /y
+if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\OgreOverlay*.* $(TargetDir) /y
 </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -340,8 +256,10 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <Image Include="ZappyGraph.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Framework\BetaGUI.cpp" />
     <ClCompile Include="Map\Cell.cpp" />
     <ClCompile Include="Object\AObject.cpp" />
+    <ClCompile Include="Object\CacheObject.cpp" />
     <ClCompile Include="Object\Gear\AGear.cpp" />
     <ClCompile Include="Object\Character\Character.cpp" />
     <ClCompile Include="Object\Gear\Deraumere.cpp" />
@@ -351,6 +269,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <ClCompile Include="Object\Gear\Sibur.cpp" />
     <ClCompile Include="Object\Gear\Thystame.cpp" />
     <ClCompile Include="Object\Ground\Ground.cpp" />
+    <ClCompile Include="State\SplashScreenState.cpp" />
     <ClCompile Include="ZappyGraph.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Framework\AdvancedOgreFramework.cpp" />
@@ -361,10 +280,12 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
+    <ClInclude Include="Framework\BetaGUI.hpp" />
     <ClInclude Include="Map\Cell.hpp" />
     <ClInclude Include="Object\AObject.hpp" />
     <ClInclude Include="Framework\AppState.hpp" />
     <ClInclude Include="Framework\AppStateManager.hpp" />
+    <ClInclude Include="Object\CacheObject.hpp" />
     <ClInclude Include="Object\Gear\AGear.hpp" />
     <ClInclude Include="Object\Character\Character.hpp" />
     <ClInclude Include="Object\Gear\Deraumere.hpp" />
@@ -375,6 +296,7 @@ echo Zip=$(OGRE_HOME)\Media\packs\SdkTrays.zip&gt;&gt;%resourcescfg%
     <ClInclude Include="Object\Gear\Thystame.hpp" />
     <ClInclude Include="Object\Ground\Ground.hpp" />
     <ClInclude Include="Object\ObjectFactory.hpp" />
+    <ClInclude Include="State\SplashScreenState.hpp" />
     <ClInclude Include="ZappyGraph.hpp" />
     <ClInclude Include="State\GameState.hpp" />
     <ClInclude Include="State\MenuState.hpp" />

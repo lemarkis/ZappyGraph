@@ -26,12 +26,23 @@ void MenuState::enter()
     OgreFramework::getSingletonPtr()->m_pViewport->setCamera(m_pCamera);
 
     OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->showCursor();
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_CENTER, "EnterBtn", "Enter GameState", 250);
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_CENTER, "ExitBtn", "Exit AdvancedOgreFramework", 250);
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_TOP, "MenuLbl", "Menu mode", 250);
+	OgreFramework::getSingletonPtr()->m_pTrayMgr->showCursor();
+	//OIS::MouseState state;
+	//state.height = Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight());
+	//state.width = Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth());
+	//state.Y.abs = OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() / 2;
+	//state.X.abs = OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() / 2;
+	//OIS::MouseEvent evt(nullptr, state);
+	//OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt);
+	//OgreFramework::getSingletonPtr()->m_pTrayMgr->getCursorContainer()->setPosition(state.X.abs, state.Y.abs);
+    
+	Ogre::OverlayElement * conect = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "EnterBtn", "Enter GameState", 250)->getOverlayElement();
+	conect->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.5);
+	Ogre::OverlayElement * exit = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "ExitBtn", "Exit AdvancedOgreFramework", 250)->getOverlayElement();
+	exit->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.55);
+    Ogre::OverlayElement * title = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "MenuLbl", "ZappyGraph", 250)->getOverlayElement();
+	title->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.5 - 125, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.02);
+	
 
     createScene();
 }

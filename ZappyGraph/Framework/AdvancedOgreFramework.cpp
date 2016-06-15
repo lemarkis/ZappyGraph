@@ -38,7 +38,7 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     m_pRenderWnd = m_pRoot->initialise(true, wndTitle);
 
     m_pViewport = m_pRenderWnd->addViewport(0);
-    m_pViewport->setBackgroundColour(Ogre::ColourValue(0.5f, 0.5f, 0.5f, 1.0f));
+    m_pViewport->setBackgroundColour(Ogre::ColourValue(0.f, 0.f, 0.f, 1.0f));
 
     m_pViewport->setCamera(0);
 
@@ -103,6 +103,11 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
 
 bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
 {
+	//if (keyEventRef.text == 8) {
+	//	mGUI->injectBackspace(mPointer->getLeft(), mPointer->getTop());
+	//	return true;
+	//}
+
     if(m_pKeyboard->isKeyDown(OIS::KC_SYSRQ))
     {
         m_pRenderWnd->writeContentsToTimestampedFile("AOF_Screenshot_", ".jpg");
