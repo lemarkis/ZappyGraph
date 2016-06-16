@@ -23,6 +23,8 @@ public:
 
 	void update(double timeSinceLastFrame);
 
+	void buttonHit(OgreBites::Button * button);
+
 private:
 	bool                        m_bQuit;
 	OgreBites::Label *			m_InputTxt;

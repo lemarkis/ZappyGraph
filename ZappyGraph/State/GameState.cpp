@@ -64,6 +64,11 @@ void GameState::createScene()
 
 bool GameState::keyPressed(const OIS::KeyEvent &keyEventRef)
 {
+	if (OgreFramework::getSingletonPtr()->m_pKeyboard->isKeyDown(OIS::KC_ESCAPE))
+	{
+		pushAppState(findByName("PauseState"));
+		return true;
+	}
     return true;
 }
 

@@ -27,14 +27,6 @@ void MenuState::enter()
 
     OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
 	OgreFramework::getSingletonPtr()->m_pTrayMgr->showCursor();
-	//OIS::MouseState state;
-	//state.height = Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight());
-	//state.width = Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth());
-	//state.Y.abs = OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() / 2;
-	//state.X.abs = OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() / 2;
-	//OIS::MouseEvent evt(nullptr, state);
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt);
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->getCursorContainer()->setPosition(state.X.abs, state.Y.abs);
     
 	m_InputTxt = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "InputTxt", "", 250);
 	m_InputTxt->getOverlayElement()->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.45);
@@ -133,6 +125,9 @@ void MenuState::buttonHit(OgreBites::Button *button)
 {
     if(button->getName() == "ExitBtn")
         m_bQuit = true;
-    else if(button->getName() == "EnterBtn")
-        changeAppState(findByName("GameState"));
+	else if (button->getName() == "EnterBtn")
+	{
+		IPConnect::getSingletonPtr()->ipPort = m_InputTxt->getCaption();
+		changeAppState(findByName("GameState"));
+	}
 }

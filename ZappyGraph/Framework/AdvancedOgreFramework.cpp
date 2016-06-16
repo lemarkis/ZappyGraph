@@ -13,12 +13,14 @@ OgreFramework::OgreFramework()
     m_pInputMgr			= 0;
     m_pKeyboard			= 0;
     m_pMouse			= 0;
+	new IPConnect();
 }
 
 OgreFramework::~OgreFramework()
 {
     OgreFramework::getSingletonPtr()->m_pLog->logMessage("Shutdown OGRE...");
     if(m_pInputMgr)		OIS::InputManager::destroyInputSystem(m_pInputMgr);
+	if(IPConnect::getSingletonPtr())	delete IPConnect::getSingletonPtr();
     if(m_pRoot)			delete m_pRoot;
 }
 
@@ -86,6 +88,11 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
+	OgreBites::InputContext inputContext;
+	inputContext.mMouse = m_pMouse;
+	inputContext.mKeyboard = m_pKeyboard;
+	m_pTrayMgr = new OgreBites::SdkTrayManager("AOFTrayMgr", m_pRenderWnd, inputContext, 0);
+
     m_pTimer = new Ogre::Timer();
     m_pTimer->reset();
 
@@ -119,13 +126,11 @@ bool OgreFramework::mouseMoved(const OIS::MouseEvent &evt)
 
 bool OgreFramework::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-	m_bMLPressed = true;
     return true;
 }
 
 bool OgreFramework::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-	m_bMLPressed = false;
     return true;
 }
 

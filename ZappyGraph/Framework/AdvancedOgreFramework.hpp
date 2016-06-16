@@ -20,6 +20,8 @@
 
 #include <SdkTrays.h>
 
+#include "Network\IPConnect.hpp"
+
 class OgreFramework : public Ogre::Singleton<OgreFramework>, OIS::KeyListener, OIS::MouseListener
 {
 public:
