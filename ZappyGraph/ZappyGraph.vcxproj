@@ -256,7 +256,6 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
     <Image Include="ZappyGraph.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Framework\Gorilla.cpp" />
     <ClCompile Include="Map\Cell.cpp" />
     <ClCompile Include="Object\AObject.cpp" />
     <ClCompile Include="Object\CacheObject.cpp" />
@@ -280,7 +279,6 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
-    <ClInclude Include="Framework\Gorilla.h" />
     <ClInclude Include="Map\Cell.hpp" />
     <ClInclude Include="Object\AObject.hpp" />
     <ClInclude Include="Framework\AppState.hpp" />
