@@ -13,7 +13,7 @@ void GameState::enter()
     sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->createSceneManager(Ogre::ST_GENERIC, "GameSceneMgr");
     sceneMgr->setAmbientLight(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
-    sceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
+	sceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
 
     camera = sceneMgr->createCamera("GameCamera");
     camera->setPosition(Ogre::Vector3(5, 60, 60));
@@ -75,22 +75,16 @@ bool GameState::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool GameState::mouseMoved(const OIS::MouseEvent &evt)
 {
-    if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt)) return true;
-
 	return true;
 }
 
 bool GameState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-    if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseDown(evt, id)) return true;
-
     return true;
 }
 
 bool GameState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-    if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseUp(evt, id)) return true;
-
     return true;
 }
 
@@ -112,7 +106,6 @@ void GameState::getInput()
 void GameState::update(double timeSinceLastFrame)
 {
     m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->frameRenderingQueued(m_FrameEvent);
 
     if(quit == true)
     {
