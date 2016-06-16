@@ -27,6 +27,7 @@ public:
 
 private:
 	bool                        m_bQuit;
+	OgreBites::Label *			m_InputTxt;
 };
 
 #endif

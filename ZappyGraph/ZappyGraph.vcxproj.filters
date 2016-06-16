@@ -25,7 +25,6 @@
     <ClCompile Include="Map\Cell.cpp" />
     <ClCompile Include="State\SplashScreenState.cpp" />
     <ClCompile Include="Object\CacheObject.cpp" />
-    <ClCompile Include="Framework\BetaGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
@@ -49,7 +48,6 @@
     <ClInclude Include="Map\Cell.hpp" />
     <ClInclude Include="State\SplashScreenState.hpp" />
     <ClInclude Include="Object\CacheObject.hpp" />
-    <ClInclude Include="Framework\BetaGUI.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration.props" />

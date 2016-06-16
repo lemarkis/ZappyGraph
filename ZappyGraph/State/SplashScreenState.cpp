@@ -28,16 +28,14 @@ void SplashScreenState::enter()
 
 	createScene();
 
-	m_pGUI = new BetaGUI::GUI("ctrl_freak.ttf", 14);
-
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
+	OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
 
 	//new ObjectCache(m_pSceneMgr);
 
-	//Ogre::OverlayElement * lbl = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "SplashLbl", "Press Enter To Continue", 250)->getOverlayElement();
-	//lbl->setPosition(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) * 50 / 100 - 125,
-	//		Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()) * 75 / 100);
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->hideCursor();
+	Ogre::OverlayElement * btn = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "SplashBtn", "Press Enter to continue...", 250)->getOverlayElement();
+	btn->setPosition(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) * 50 / 100 - 125,
+			Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()) * 75 / 100);
+	OgreFramework::getSingletonPtr()->m_pTrayMgr->hideCursor();
 }
 
 void SplashScreenState::createScene()
@@ -71,7 +69,6 @@ void SplashScreenState::exit()
 	m_pSceneMgr->destroyCamera(m_pCamera);
 	if (m_pSceneMgr)
 		OgreFramework::getSingletonPtr()->m_pRoot->destroySceneManager(m_pSceneMgr);
-	delete m_pGUI;
 
 	OgreFramework::getSingletonPtr()->m_pTrayMgr->clearAllTrays();
 	OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
@@ -129,4 +126,10 @@ void SplashScreenState::update(double timeSinceLastFrame)
 		shutdown();
 		return;
 	}
+}
+
+void SplashScreenState::buttonHit(OgreBites::Button *button)
+{
+	if (button->getName() == "SplashBtn")
+		changeAppState(findByName("GameState"));
 }

@@ -18,7 +18,6 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
-//#include "BetaGUI.hpp"
 #include <SdkTrays.h>
 
 class OgreFramework : public Ogre::Singleton<OgreFramework>, OIS::KeyListener, OIS::MouseListener

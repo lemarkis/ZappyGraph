@@ -2,7 +2,6 @@
 #define SPLASHSCREEN_STATE_HPP
 
 #include "Framework\AppState.hpp"
-#include "Framework\BetaGUI.hpp"
 #include "Object\CacheObject.hpp"
 
 class SplashScreenState : public AppState
@@ -23,11 +22,12 @@ public:
 	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 
+	void buttonHit(OgreBites::Button* button);
+
 	void update(double timeSinceLastFrame);
 
 private:
 	bool                        m_bQuit;
-	BetaGUI::GUI *				m_pGUI;
 };
 
 #endif

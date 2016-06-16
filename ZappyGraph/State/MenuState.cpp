@@ -36,14 +36,15 @@ void MenuState::enter()
 	//OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt);
 	//OgreFramework::getSingletonPtr()->m_pTrayMgr->getCursorContainer()->setPosition(state.X.abs, state.Y.abs);
     
-	Ogre::OverlayElement * conect = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "EnterBtn", "Enter GameState", 250)->getOverlayElement();
+	m_InputTxt = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "InputTxt", "", 250);
+	m_InputTxt->getOverlayElement()->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.45);
+	Ogre::OverlayElement * conect = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "EnterBtn", "Connect", 250)->getOverlayElement();
 	conect->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.5);
-	Ogre::OverlayElement * exit = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "ExitBtn", "Exit AdvancedOgreFramework", 250)->getOverlayElement();
+	Ogre::OverlayElement * exit = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "ExitBtn", "Quit", 250)->getOverlayElement();
 	exit->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.55);
     Ogre::OverlayElement * title = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "MenuLbl", "ZappyGraph", 250)->getOverlayElement();
 	title->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.5 - 125, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.02);
-	
-
+	OgreFramework::getSingletonPtr()->m_pTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
     createScene();
 }
 
@@ -71,6 +72,22 @@ bool MenuState::keyPressed(const OIS::KeyEvent &keyEventRef)
         m_bQuit = true;
         return true;
     }
+
+	if (((keyEventRef.text >= 48 && keyEventRef.text <= 58) || keyEventRef.text == 46) && m_InputTxt->getCaption().size() < 20)
+	{
+		Ogre::String ip(m_InputTxt->getCaption());
+		char c = keyEventRef.text;
+		Ogre::String tmp(1, c);
+		ip.append(tmp);
+		m_InputTxt->setCaption(ip);
+	}
+
+	if (keyEventRef.text == 8 && m_InputTxt->getCaption().size() > 0)
+	{
+		Ogre::String ip(m_InputTxt->getCaption());
+		ip.erase(ip.end() - 1);
+		m_InputTxt->setCaption(ip);
+	}
 
     OgreFramework::getSingletonPtr()->keyPressed(keyEventRef);
     return true;
