@@ -7,6 +7,7 @@
 #include <OgreOverlay.h>
 #include <OgreOverlayElement.h>
 #include <OgreOverlayManager.h>
+#include <OgreOverlaySystem.h>
 #include <OgreRoot.h>
 #include <OgreViewport.h>
 #include <OgreSceneManager.h>
@@ -18,8 +19,7 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
-//#include "BetaGUI.hpp"
-#include <SdkTrays.h>
+#include "BetaGUI.hpp"
 
 class OgreFramework : public Ogre::Singleton<OgreFramework>, OIS::KeyListener, OIS::MouseListener
 {
@@ -47,12 +47,14 @@ public:
 	OIS::Keyboard*				m_pKeyboard;
 	OIS::Mouse*					m_pMouse;
 
-    Ogre::OverlaySystem*        m_pOverlaySystem;
-    OgreBites::SdkTrayManager*	m_pTrayMgr;
+	Ogre::OverlaySystem*        m_pOverlaySystem;
+	BetaGUI::GUI *				m_pGUI;
+	Ogre::OverlayElement *		m_pOverlayMouse;
+	bool						m_bMLPressed;
 
 private:
-	OgreFramework(const OgreFramework&);
-	OgreFramework& operator= (const OgreFramework&);
+	OgreFramework(const OgreFramework&) {};
+	OgreFramework& operator= (const OgreFramework&) {};
 };
 
 #endif

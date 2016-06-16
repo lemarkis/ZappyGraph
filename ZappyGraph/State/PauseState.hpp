@@ -21,14 +21,12 @@ public:
     bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
     bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 
-    void buttonHit(OgreBites::Button* button);
-    void yesNoDialogClosed(const Ogre::DisplayString& question, bool yesHit);
+	void onButtonPress(BetaGUI::Button *ref);
 
     void update(double timeSinceLastFrame);
 
 private:
     bool                        m_bQuit;
-    bool                        m_bQuestionActive;
 };
 
 #endif

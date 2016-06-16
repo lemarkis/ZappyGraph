@@ -13,13 +13,13 @@ OgreFramework::OgreFramework()
     m_pInputMgr			= 0;
     m_pKeyboard			= 0;
     m_pMouse			= 0;
-    m_pTrayMgr          = 0;
+    m_pGUI		        = 0;
 }
 
 OgreFramework::~OgreFramework()
 {
     OgreFramework::getSingletonPtr()->m_pLog->logMessage("Shutdown OGRE...");
-    if(m_pTrayMgr)      delete m_pTrayMgr;
+    if(m_pGUI)			delete m_pGUI;
     if(m_pInputMgr)		OIS::InputManager::destroyInputSystem(m_pInputMgr);
     if(m_pRoot)			delete m_pRoot;
 }
@@ -42,7 +42,7 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
 
     m_pViewport->setCamera(0);
 
-    m_pOverlaySystem = new Ogre::OverlaySystem();
+	m_pOverlaySystem = new Ogre::OverlaySystem();
 
     size_t hWnd = 0;
     OIS::ParamList paramList;
@@ -88,10 +88,8 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     Ogre::TextureManager::getSingleton().setDefaultNumMipmaps(5);
     Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 
-    OgreBites::InputContext inputContext;
-    inputContext.mMouse = m_pMouse;
-    inputContext.mKeyboard = m_pKeyboard;
-    m_pTrayMgr = new OgreBites::SdkTrayManager("AOFTrayMgr", m_pRenderWnd, inputContext, 0);
+	m_pGUI = new BetaGUI::GUI("", 14);
+	m_pOverlayMouse = m_pGUI->createMousePointer(Ogre::Vector2(32, 32), "bgui.pointer");
 
     m_pTimer = new Ogre::Timer();
     m_pTimer->reset();
@@ -103,10 +101,12 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
 
 bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
 {
-	//if (keyEventRef.text == 8) {
-	//	mGUI->injectBackspace(mPointer->getLeft(), mPointer->getTop());
-	//	return true;
-	//}
+	Ogre::Vector2 mousePos = Ogre::Vector2(m_pMouse->getMouseState().X.abs, m_pMouse->getMouseState().Y.abs);
+
+	if (keyEventRef.text == 8) {
+		m_pGUI->injectBackspace(mousePos.x, mousePos.y);
+		return true;
+	}
 
     if(m_pKeyboard->isKeyDown(OIS::KC_SYSRQ))
     {
@@ -114,19 +114,9 @@ bool OgreFramework::keyPressed(const OIS::KeyEvent &keyEventRef)
         return true;
     }
 
-    if(m_pKeyboard->isKeyDown(OIS::KC_O))
-    {
-        if(m_pTrayMgr->isLogoVisible())
-        {
-            m_pTrayMgr->hideFrameStats();
-            m_pTrayMgr->hideLogo();
-        }
-        else
-        {
-            m_pTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
-            m_pTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-        }
-    }
+	Ogre::String key;
+	key = static_cast<char>(keyEventRef.text);
+	m_pGUI->injectKey(key, mousePos.x, mousePos.y);
 
     return true;
 }
@@ -143,14 +133,25 @@ bool OgreFramework::mouseMoved(const OIS::MouseEvent &evt)
 
 bool OgreFramework::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
+	m_bMLPressed = true;
     return true;
 }
 
 bool OgreFramework::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
+	m_bMLPressed = false;
     return true;
 }
 
 void OgreFramework::updateOgre(double timeSinceLastFrame)
 {
+	OIS::MouseState mState = m_pMouse->getMouseState();
+	if (m_bMLPressed)
+	{
+		m_pGUI->injectMouse(mState.X.abs, mState.Y.abs, true);
+	}
+	else
+	{
+		m_pGUI->injectMouse(mState.X.abs, mState.Y.abs, true);
+	}
 }

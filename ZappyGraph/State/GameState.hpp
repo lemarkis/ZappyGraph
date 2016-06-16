@@ -32,6 +32,8 @@ public:
 
 	void onLeftPressed(const OIS::MouseEvent &evt);
 
+	void onButtonPress(BetaGUI::Button *ref);
+
 	void update(double timeSinceLastFrame);
 
 private:

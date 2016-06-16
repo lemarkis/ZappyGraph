@@ -13,7 +13,7 @@ void MenuState::enter()
     m_pSceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->createSceneManager(Ogre::ST_GENERIC, "MenuSceneMgr");
     m_pSceneMgr->setAmbientLight(Ogre::ColourValue(0.7f, 0.7f, 0.7f));
 
-    m_pSceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
+	m_pSceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
 
     m_pCamera = m_pSceneMgr->createCamera("MenuCam");
     m_pCamera->setPosition(Ogre::Vector3(0, 25, -50));
@@ -24,25 +24,6 @@ void MenuState::enter()
         Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()));
 
     OgreFramework::getSingletonPtr()->m_pViewport->setCamera(m_pCamera);
-
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
-	OgreFramework::getSingletonPtr()->m_pTrayMgr->showCursor();
-	//OIS::MouseState state;
-	//state.height = Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight());
-	//state.width = Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth());
-	//state.Y.abs = OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() / 2;
-	//state.X.abs = OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() / 2;
-	//OIS::MouseEvent evt(nullptr, state);
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt);
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->getCursorContainer()->setPosition(state.X.abs, state.Y.abs);
-    
-	Ogre::OverlayElement * conect = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "EnterBtn", "Enter GameState", 250)->getOverlayElement();
-	conect->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.5);
-	Ogre::OverlayElement * exit = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "ExitBtn", "Exit AdvancedOgreFramework", 250)->getOverlayElement();
-	exit->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.55);
-    Ogre::OverlayElement * title = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "MenuLbl", "ZappyGraph", 250)->getOverlayElement();
-	title->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.5 - 125, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.02);
-	
 
     createScene();
 }
@@ -58,10 +39,6 @@ void MenuState::exit()
     m_pSceneMgr->destroyCamera(m_pCamera);
     if(m_pSceneMgr)
         OgreFramework::getSingletonPtr()->m_pRoot->destroySceneManager(m_pSceneMgr);
-
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->clearAllTrays();
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->setListener(0);
 }
 
 bool MenuState::keyPressed(const OIS::KeyEvent &keyEventRef)
@@ -84,38 +61,30 @@ bool MenuState::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool MenuState::mouseMoved(const OIS::MouseEvent &evt)
 {
-    if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt)) return true;
     return true;
 }
 
 bool MenuState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-    if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseDown(evt, id)) return true;
     return true;
 }
 
 bool MenuState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-    if(OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseUp(evt, id)) return true;
     return true;
+}
+
+void MenuState::onButtonPress(BetaGUI::Button * ref)
+{
 }
 
 void MenuState::update(double timeSinceLastFrame)
 {
     m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;
-    OgreFramework::getSingletonPtr()->m_pTrayMgr->frameRenderingQueued(m_FrameEvent);
 
     if(m_bQuit == true)
     {
         shutdown();
         return;
     }
-}
-
-void MenuState::buttonHit(OgreBites::Button *button)
-{
-    if(button->getName() == "ExitBtn")
-        m_bQuit = true;
-    else if(button->getName() == "EnterBtn")
-        changeAppState(findByName("GameState"));
 }

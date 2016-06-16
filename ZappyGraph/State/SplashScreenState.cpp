@@ -28,16 +28,10 @@ void SplashScreenState::enter()
 
 	createScene();
 
-	m_pGUI = new BetaGUI::GUI("ctrl_freak.ttf", 14);
-
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
-
 	//new ObjectCache(m_pSceneMgr);
 
-	//Ogre::OverlayElement * lbl = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "SplashLbl", "Press Enter To Continue", 250)->getOverlayElement();
-	//lbl->setPosition(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) * 50 / 100 - 125,
-	//		Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()) * 75 / 100);
-	//OgreFramework::getSingletonPtr()->m_pTrayMgr->hideCursor();
+	BetaGUI::Window *wdw = OgreFramework::getSingletonPtr()->m_pGUI->createWindow(Ogre::Vector4(100, 100, 100, 200), "bgui.window", BetaGUI::NONE);
+	wdw->createStaticText(Ogre::Vector4(100, 100, 100, 200), "Press Enter to continue...");
 }
 
 void SplashScreenState::createScene()
@@ -71,11 +65,6 @@ void SplashScreenState::exit()
 	m_pSceneMgr->destroyCamera(m_pCamera);
 	if (m_pSceneMgr)
 		OgreFramework::getSingletonPtr()->m_pRoot->destroySceneManager(m_pSceneMgr);
-	delete m_pGUI;
-
-	OgreFramework::getSingletonPtr()->m_pTrayMgr->clearAllTrays();
-	OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
-	OgreFramework::getSingletonPtr()->m_pTrayMgr->setListener(0);
 }
 
 bool SplashScreenState::keyPressed(const OIS::KeyEvent &keyEventRef)
@@ -103,26 +92,26 @@ bool SplashScreenState::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool SplashScreenState::mouseMoved(const OIS::MouseEvent &evt)
 {
-	if (OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt)) return true;
 	return true;
 }
 
 bool SplashScreenState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-	if (OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseDown(evt, id)) return true;
 	return true;
 }
 
 bool SplashScreenState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
-	if (OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseUp(evt, id)) return true;
 	return true;
+}
+
+void SplashScreenState::onButtonPress(BetaGUI::Button * ref)
+{
 }
 
 void SplashScreenState::update(double timeSinceLastFrame)
 {
 	m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;
-	OgreFramework::getSingletonPtr()->m_pTrayMgr->frameRenderingQueued(m_FrameEvent);
 
 	if (m_bQuit == true)
 	{
