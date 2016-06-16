@@ -78,10 +78,6 @@ bool PauseState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id
     return true;
 }
 
-void PauseState::onButtonPress(BetaGUI::Button * ref)
-{
-}
-
 void PauseState::update(double timeSinceLastFrame)
 {
     m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;

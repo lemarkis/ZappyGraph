@@ -30,8 +30,6 @@ void SplashScreenState::enter()
 
 	//new ObjectCache(m_pSceneMgr);
 
-	BetaGUI::Window *wdw = OgreFramework::getSingletonPtr()->m_pGUI->createWindow(Ogre::Vector4(100, 100, 100, 200), "bgui.window", BetaGUI::NONE);
-	wdw->createStaticText(Ogre::Vector4(100, 100, 100, 200), "Press Enter to continue...");
 }
 
 void SplashScreenState::createScene()
@@ -103,10 +101,6 @@ bool SplashScreenState::mousePressed(const OIS::MouseEvent &evt, OIS::MouseButto
 bool SplashScreenState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
 {
 	return true;
-}
-
-void SplashScreenState::onButtonPress(BetaGUI::Button * ref)
-{
 }
 
 void SplashScreenState::update(double timeSinceLastFrame)

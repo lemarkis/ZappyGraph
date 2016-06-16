@@ -93,10 +93,6 @@ void GameState::onLeftPressed(const OIS::MouseEvent &evt)
 
 }
 
-void GameState::onButtonPress(BetaGUI::Button * ref)
-{
-}
-
 void GameState::moveCamera()
 {
 

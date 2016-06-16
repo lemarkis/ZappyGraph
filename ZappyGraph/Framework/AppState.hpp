@@ -2,7 +2,6 @@
 #define APP_STATE_HPP
 
 #include "AdvancedOgreFramework.hpp"
-#include "BetaGUI.hpp"
 
 class AppState;
 
@@ -23,7 +22,7 @@ public:
     virtual void        popAllAndPushAppState(AppState* state) = 0;
 };
 
-class AppState : public OIS::KeyListener, public OIS::MouseListener, public BetaGUI::BetaGUIListener
+class AppState : public OIS::KeyListener, public OIS::MouseListener
 {
 public:
 	static void create(AppStateListener* parent, const Ogre::String name){};

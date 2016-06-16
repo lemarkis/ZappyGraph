@@ -19,8 +19,6 @@
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
-#include "BetaGUI.hpp"
-
 class OgreFramework : public Ogre::Singleton<OgreFramework>, OIS::KeyListener, OIS::MouseListener
 {
 public:
@@ -48,7 +46,6 @@ public:
 	OIS::Mouse*					m_pMouse;
 
 	Ogre::OverlaySystem*        m_pOverlaySystem;
-	BetaGUI::GUI *				m_pGUI;
 	Ogre::OverlayElement *		m_pOverlayMouse;
 	bool						m_bMLPressed;
 

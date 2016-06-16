@@ -21,8 +21,6 @@ public:
 	bool mousePressed(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 	bool mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id);
 
-	void onButtonPress(BetaGUI::Button *ref);
-
 	void update(double timeSinceLastFrame);
 
 private:

@@ -74,10 +74,6 @@ bool MenuState::mouseReleased(const OIS::MouseEvent &evt, OIS::MouseButtonID id)
     return true;
 }
 
-void MenuState::onButtonPress(BetaGUI::Button * ref)
-{
-}
-
 void MenuState::update(double timeSinceLastFrame)
 {
     m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;
