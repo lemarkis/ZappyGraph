@@ -28,7 +28,7 @@ void MenuState::enter()
     OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
 	OgreFramework::getSingletonPtr()->m_pTrayMgr->showCursor();
     
-	m_InputTxt = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "InputTxt", "", 250);
+	m_InputTxt = OgreFramework::getSingletonPtr()->m_pTrayMgr->createLabel(OgreBites::TL_NONE, "InputTxt", "Enter IP:port", 250);
 	m_InputTxt->getOverlayElement()->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.45);
 	Ogre::OverlayElement * conect = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "EnterBtn", "Connect", 250)->getOverlayElement();
 	conect->setPosition(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth() * 0.15, OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight() * 0.5);
@@ -65,9 +65,13 @@ bool MenuState::keyPressed(const OIS::KeyEvent &keyEventRef)
         return true;
     }
 
-	if (((keyEventRef.text >= 48 && keyEventRef.text <= 58) || keyEventRef.text == 46) && m_InputTxt->getCaption().size() < 20)
+	if (((keyEventRef.text >= 48 && keyEventRef.text <= 58) || keyEventRef.text == 46) && m_InputTxt->getCaption().size() < 21)
 	{
 		Ogre::String ip(m_InputTxt->getCaption());
+		if (!ip.compare("Invalid IP") || !ip.compare("Enter IP:port"))
+		{
+			ip.clear();
+		}
 		char c = keyEventRef.text;
 		Ogre::String tmp(1, c);
 		ip.append(tmp);
@@ -127,7 +131,15 @@ void MenuState::buttonHit(OgreBites::Button *button)
         m_bQuit = true;
 	else if (button->getName() == "EnterBtn")
 	{
-		IPConnect::getSingletonPtr()->ipPort = m_InputTxt->getCaption();
-		changeAppState(findByName("GameState"));
+		Ogre::String input = m_InputTxt->getCaption();
+		if (!std::regex_match(input, std::regex("[0-9]{3}.[0-9]{3}.[0-9]{3}.[0-9]{3}:[0-9]{5}")))
+		{
+			m_InputTxt->setCaption("Invalid IP");
+		}
+		else
+		{
+			IPConnect::getSingletonPtr()->ipPort = input;
+			changeAppState(findByName("GameState"));
+		}
 	}
 }

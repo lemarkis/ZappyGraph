@@ -2,6 +2,7 @@
 #define MENU_STATE_HPP
 
 #include "Framework\AppState.hpp"
+#include <regex>
 
 class MenuState : public AppState
 {

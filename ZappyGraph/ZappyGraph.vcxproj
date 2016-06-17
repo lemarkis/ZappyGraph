@@ -260,6 +260,8 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
     <ClCompile Include="Network\IPConnect.cpp" />
     <ClCompile Include="Object\AObject.cpp" />
     <ClCompile Include="Object\CacheObject.cpp" />
+    <ClCompile Include="Object\Map\Cell.cpp" />
+    <ClCompile Include="Object\Food\Food.cpp" />
     <ClCompile Include="Object\Gear\AGear.cpp" />
     <ClCompile Include="Object\Character\Character.cpp" />
     <ClCompile Include="Object\Gear\Deraumere.cpp" />
@@ -269,6 +271,8 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
     <ClCompile Include="Object\Gear\Sibur.cpp" />
     <ClCompile Include="Object\Gear\Thystame.cpp" />
     <ClCompile Include="Object\Ground\Ground.cpp" />
+    <ClCompile Include="Object\Map\World.cpp" />
+    <ClCompile Include="Object\ObjectFactory.cpp" />
     <ClCompile Include="State\SplashScreenState.cpp" />
     <ClCompile Include="ZappyGraph.cpp" />
     <ClCompile Include="main.cpp" />
@@ -286,6 +290,7 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
     <ClInclude Include="Framework\AppState.hpp" />
     <ClInclude Include="Framework\AppStateManager.hpp" />
     <ClInclude Include="Object\CacheObject.hpp" />
+    <ClInclude Include="Object\Food\Food.hpp" />
     <ClInclude Include="Object\Gear\AGear.hpp" />
     <ClInclude Include="Object\Character\Character.hpp" />
     <ClInclude Include="Object\Gear\Deraumere.hpp" />
@@ -295,6 +300,7 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
     <ClInclude Include="Object\Gear\Sibur.hpp" />
     <ClInclude Include="Object\Gear\Thystame.hpp" />
     <ClInclude Include="Object\Ground\Ground.hpp" />
+    <ClInclude Include="Object\Map\World.hpp" />
     <ClInclude Include="Object\ObjectFactory.hpp" />
     <ClInclude Include="State\SplashScreenState.hpp" />
     <ClInclude Include="ZappyGraph.hpp" />
@@ -304,6 +310,7 @@ if not exist $(TargetDir)\OgreOverlay*.* copy $(OGRE_HOME)\bin\$(Configuration)\
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration.props" />
+    <None Include="Object\Map\Cell.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

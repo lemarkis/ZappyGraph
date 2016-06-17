@@ -24,7 +24,7 @@ Ogre::String const & IPConnect::getIP() const
 	}
 }
 
-Ogre::String const & IPConnect::getPort() const
+int const & IPConnect::getPort() const
 {
 	int pos = 0;
 	int size = ipPort.size();
@@ -33,7 +33,7 @@ Ogre::String const & IPConnect::getPort() const
 		++pos;
 		if (*it == ':')
 		{
-			return ipPort.substr(0, pos);
+			return std::stoi(ipPort.substr(0, pos));
 		}
 	}
 }

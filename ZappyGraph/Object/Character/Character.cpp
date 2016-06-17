@@ -4,6 +4,7 @@ Character::Character(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::Sce
 {
 	entity = pEntity;
 	node = pNode;
+	node->attachObject(entity);
 	setAnimation("idle");
 }
 

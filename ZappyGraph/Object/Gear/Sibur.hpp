@@ -6,7 +6,7 @@
 class Sibur : public AGear
 {
 public:
-	Sibur(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
+	Sibur(Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
 	~Sibur();
 
 private:

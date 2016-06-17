@@ -6,7 +6,7 @@
 class Deraumere : public AGear
 {
 public:
-	Deraumere(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
+	Deraumere(Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
 	~Deraumere();
 
 private:

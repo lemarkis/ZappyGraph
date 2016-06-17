@@ -1,6 +1,7 @@
 #ifndef OBJECTFACTORY_HPP
 #define OBJECTFACTORY_HPP
 
+#include "World.hpp"
 #include "Object\Character\Character.hpp"
 #include "Object\Gear\Deraumere.hpp"
 #include "Object\Gear\Linemate.hpp"
@@ -15,16 +16,14 @@ public:
 	~ObjectFactory();
 
 	//--- Create ---
-	Character * CreateCharacter(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
+	Character * CreateCharacter(Ogre::SceneManager * pSceneMgr, int pX, int pY, Ogre::String const pName);
 
-	Deraumere * CreateDeraumere(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
-	Linemate * CreateLinemate(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
-	Mendiane * CreateMendiane(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
-	Phiras * CreatePhiras(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
-	Sibur * CreateSibur(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
-	Thystame * CreateThystame(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
-
-	cell * CreateCell(Ogre::SceneManager * pSceneMgr, Ogre::String const pName, int pX, int pY);
+	Deraumere * CreateDeraumere(Ogre::SceneManager * pSceneMgr, int pX, int pY);
+	Linemate * CreateLinemate(Ogre::SceneManager * pSceneMgr, int pX, int pY);
+	Mendiane * CreateMendiane(Ogre::SceneManager * pSceneMgr, int pX, int pY);
+	Phiras * CreatePhiras(Ogre::SceneManager * pSceneMgr, int pX, int pY);
+	Sibur * CreateSibur(Ogre::SceneManager * pSceneMgr, int pX, int pY);
+	Thystame * CreateThystame(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 
 	//--- Destroy ---
 	void DestroyCharacter(Ogre::String const pName);
@@ -37,7 +36,7 @@ public:
 	void DestroyThystame(Ogre::String const pName);
 
 private:
-
+	ObjectFactory();
 };
 
 #endif // !OBJECTFACTORY_HPP

@@ -6,7 +6,7 @@
 class Thystame : public AGear
 {
 public:
-	Thystame(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
+	Thystame(Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
 	~Thystame();
 
 private:

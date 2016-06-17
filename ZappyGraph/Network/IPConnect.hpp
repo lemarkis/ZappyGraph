@@ -10,7 +10,7 @@ public:
 	~IPConnect();
 
 	Ogre::String const & getIP() const;
-	Ogre::String const & getPort() const;
+	int const & getPort() const;
 
 	Ogre::String	ipPort;
 

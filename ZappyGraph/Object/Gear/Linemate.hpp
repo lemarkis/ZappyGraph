@@ -6,7 +6,7 @@
 class Linemate : public AGear
 {
 public:
-	Linemate(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
+	Linemate(Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
 	~Linemate();
 
 private:

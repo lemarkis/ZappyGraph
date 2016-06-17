@@ -6,7 +6,7 @@
 class Phiras : public AGear
 {
 public:
-	Phiras(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
+	Phiras(Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
 	~Phiras();
 
 private:

@@ -26,6 +26,10 @@
     <ClCompile Include="State\SplashScreenState.cpp" />
     <ClCompile Include="Object\CacheObject.cpp" />
     <ClCompile Include="Network\IPConnect.cpp" />
+    <ClCompile Include="Object\ObjectFactory.cpp" />
+    <ClCompile Include="Object\Food\Food.cpp" />
+    <ClCompile Include="Object\Map\Cell.cpp" />
+    <ClCompile Include="Object\Map\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\AdvancedOgreFramework.hpp" />
@@ -44,14 +48,17 @@
     <ClInclude Include="Object\Gear\Sibur.hpp" />
     <ClInclude Include="Object\Gear\Thystame.hpp" />
     <ClInclude Include="Object\Gear\AGear.hpp" />
-    <ClInclude Include="Object\ObjectFactory.hpp" />
     <ClInclude Include="Object\Ground\Ground.hpp" />
     <ClInclude Include="Map\Cell.hpp" />
     <ClInclude Include="State\SplashScreenState.hpp" />
     <ClInclude Include="Object\CacheObject.hpp" />
     <ClInclude Include="Network\IPConnect.hpp" />
+    <ClInclude Include="Object\ObjectFactory.hpp" />
+    <ClInclude Include="Object\Food\Food.hpp" />
+    <ClInclude Include="Object\Map\World.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration.props" />
+    <None Include="Object\Map\Cell.hpp" />
   </ItemGroup>
 </Project>

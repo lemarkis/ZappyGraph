@@ -1,9 +1,10 @@
 #include "Linemate.hpp"
 
-Linemate::Linemate(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode) : AGear(pName)
+Linemate::Linemate(Ogre::Entity * pEntity, Ogre::SceneNode * pNode) : AGear()
 {
 	entity = pEntity;
 	node = pNode;
+	node->attachObject(entity);
 }
 
 Linemate::~Linemate()

@@ -6,7 +6,7 @@
 class Mendiane : public AGear
 {
 public:
-	Mendiane(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
+	Mendiane(Ogre::Entity * pEntity, Ogre::SceneNode * pNode);
 	~Mendiane();
 
 private:
