@@ -10,7 +10,7 @@ public:
 	virtual ~AGear();
 
 protected:
-	AGear(Ogre::String const pName = "NoName");
+	AGear();
 
 };
 

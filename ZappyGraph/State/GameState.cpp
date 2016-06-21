@@ -24,6 +24,22 @@ void GameState::enter()
         Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()));
 
     OgreFramework::getSingletonPtr()->m_pViewport->setCamera(camera);
+	
+	try
+	{
+		socket = new Socket(IPConnect::getSingletonPtr()->getIP(), IPConnect::getSingletonPtr()->getPort());
+		socket->socketConnect();
+	}
+	catch (const std::exception& e)
+	{
+		OgreFramework::getSingletonPtr()->m_pLog->logMessage(e.what());
+		delete socket;
+		socket = nullptr;
+		changeAppState(findByName("MenuState"));
+	}
+
+	new ObjectFactory();
+	new Protocole();
 
     buildGUI();
 
@@ -54,12 +70,29 @@ void GameState::exit()
     sceneMgr->destroyCamera(camera);
     if(sceneMgr)
         OgreFramework::getSingletonPtr()->m_pRoot->destroySceneManager(sceneMgr);
+	if (socket != nullptr)
+	{
+		socket->socketClose();
+		delete socket;
+		socket = nullptr;
+	}
+	delete Protocole::getSingletonPtr();
+	delete ObjectFactory::getSingletonPtr();
 }
 
 void GameState::createScene()
 {
     sceneMgr->createLight("Light")->setPosition(75,75,75);
 
+	Ogre::String msg;
+	socket->socketRead(msg);
+	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(msg.substr(0, msg.size() - 1)));
+	if (socket->socketWrite("GRAPHIC\n") <= 0)
+	{
+		socket->socketClose();
+		changeAppState(findByName("MenuState"));
+	}
+	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String(">>> [Internet] : ").append("GRAPHIC"));
 }
 
 bool GameState::keyPressed(const OIS::KeyEvent &keyEventRef)
@@ -69,6 +102,7 @@ bool GameState::keyPressed(const OIS::KeyEvent &keyEventRef)
 		pushAppState(findByName("PauseState"));
 		return true;
 	}
+	
     return true;
 }
 
@@ -117,6 +151,19 @@ void GameState::update(double timeSinceLastFrame)
         popAppState();
         return;
     }
+
+	socket->socketFD_ZERO(&fd_read);
+	socket->socketFD_ZERO(&fd_write);
+	socket->socketFD_SET(&fd_read);
+	socket->socketFD_SET(&fd_write);
+	socket->socketSelect(&fd_read, &fd_write);
+	if (FD_ISSET(socket->getSock(), &fd_read))
+	{
+		Ogre::String msg;
+		socket->socketRead(msg);
+		OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(msg.substr(0, msg.size() - 1)));
+		quit = Protocole::getSingletonPtr()->parseMsg(msg);
+	}
 
     getInput();
     moveCamera();

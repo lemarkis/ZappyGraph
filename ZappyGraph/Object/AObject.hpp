@@ -13,7 +13,8 @@ public:
 	virtual Ogre::String const & getName() const;
 
 protected:
-	AObject(Ogre::String pName = "NoName");
+	AObject(Ogre::String pName);
+	AObject();
 
 	Ogre::Entity * entity;
 	Ogre::SceneNode * node;

@@ -84,6 +84,19 @@ bool MenuState::keyPressed(const OIS::KeyEvent &keyEventRef)
 		ip.erase(ip.end() - 1);
 		m_InputTxt->setCaption(ip);
 	}
+	if (keyEventRef.key == OIS::KC_RETURN)
+	{
+		Ogre::String input = m_InputTxt->getCaption();
+		if (!std::regex_match(input, std::regex("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]{1,5}")))
+		{
+			m_InputTxt->setCaption("Invalid IP");
+		}
+		else
+		{
+			IPConnect::getSingletonPtr()->ipPort = input;
+			changeAppState(findByName("GameState"));
+		}
+	}
 
     OgreFramework::getSingletonPtr()->keyPressed(keyEventRef);
     return true;
@@ -132,7 +145,7 @@ void MenuState::buttonHit(OgreBites::Button *button)
 	else if (button->getName() == "EnterBtn")
 	{
 		Ogre::String input = m_InputTxt->getCaption();
-		if (!std::regex_match(input, std::regex("[0-9]{3}.[0-9]{3}.[0-9]{3}.[0-9]{3}:[0-9]{5}")))
+		if (!std::regex_match(input, std::regex("[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:[0-9]{1,5}")))
 		{
 			m_InputTxt->setCaption("Invalid IP");
 		}

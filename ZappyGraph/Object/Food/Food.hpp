@@ -1,7 +1,7 @@
 #ifndef FOOD_HPP
 #define FOOD_HPP
 
-#include "AObject.hpp"
+#include "Object\AObject.hpp"
 
 class Food : public AObject
 {

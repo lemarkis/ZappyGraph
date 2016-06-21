@@ -10,7 +10,7 @@ IPConnect::~IPConnect()
 {
 }
 
-Ogre::String const & IPConnect::getIP() const
+Ogre::String const IPConnect::getIP() const
 {
 	int pos = 0;
 	int size = ipPort.size();
@@ -19,12 +19,14 @@ Ogre::String const & IPConnect::getIP() const
 		++pos;
 		if (*it == ':')
 		{
-			return ipPort.substr(pos + 1, size - pos);
+			Ogre::String sub(ipPort.substr(0, pos - 1));
+			//OgreFramework::getSingletonPtr()->m_pLog->logMessage(sub);
+			return sub;
 		}
 	}
 }
 
-int const & IPConnect::getPort() const
+int const IPConnect::getPort() const
 {
 	int pos = 0;
 	int size = ipPort.size();
@@ -33,7 +35,7 @@ int const & IPConnect::getPort() const
 		++pos;
 		if (*it == ':')
 		{
-			return std::stoi(ipPort.substr(0, pos));
+			return std::stoi(ipPort.substr(pos, size - pos));
 		}
 	}
 }

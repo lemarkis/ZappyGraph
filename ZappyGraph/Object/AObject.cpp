@@ -4,6 +4,10 @@ AObject::AObject(Ogre::String pName): name(pName), node(nullptr), entity(nullptr
 {
 }
 
+AObject::AObject()
+{
+}
+
 AObject::~AObject()
 {
 }

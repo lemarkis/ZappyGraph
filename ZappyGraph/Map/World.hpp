@@ -5,7 +5,7 @@
 
 #include <Ogre.h>
 
-#include "Cell.hpp"
+#include "Map\Cell.hpp"
 
 class Cell;
 
@@ -16,7 +16,7 @@ public:
 	~World();
 
 	Cell ***_map;
-
+	int sizeX, sizeY;
 	Cell * getCell(int const pX, int const pY) const;
 
 private:

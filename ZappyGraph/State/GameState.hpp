@@ -5,6 +5,8 @@
 #include <OgreMaterialManager.h>
 
 #include "Framework\AppState.hpp"
+#include "Network\Socket.hpp"
+#include "Network\Protocole.hpp"
 
 class GameState : public AppState
 {
@@ -40,6 +42,9 @@ private:
 
 	Ogre::SceneManager * sceneMgr;
 	Ogre::Camera * camera;
+
+	Socket * socket;
+	fd_set fd_read, fd_write;
 
 };
 

@@ -1,7 +1,7 @@
 #ifndef OBJECTFACTORY_HPP
 #define OBJECTFACTORY_HPP
 
-#include "World.hpp"
+#include "Map\World.hpp"
 #include "Object\Character\Character.hpp"
 #include "Object\Gear\Deraumere.hpp"
 #include "Object\Gear\Linemate.hpp"
@@ -10,13 +10,14 @@
 #include "Object\Gear\Sibur.hpp"
 #include "Object\Gear\Thystame.hpp"
 
-class ObjectFactory
+class ObjectFactory : public Ogre::Singleton<ObjectFactory>
 {
 public:
+	ObjectFactory();
 	~ObjectFactory();
 
 	//--- Create ---
-	Character * CreateCharacter(Ogre::SceneManager * pSceneMgr, int pX, int pY, Ogre::String const pName);
+	Character * CreateCharacter(Ogre::SceneManager * pSceneMgr, int pX, int pY, int pOrientation, Ogre::String pTeamName, int pNumJoueur);
 
 	Deraumere * CreateDeraumere(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 	Linemate * CreateLinemate(Ogre::SceneManager * pSceneMgr, int pX, int pY);
@@ -24,19 +25,20 @@ public:
 	Phiras * CreatePhiras(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 	Sibur * CreateSibur(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 	Thystame * CreateThystame(Ogre::SceneManager * pSceneMgr, int pX, int pY);
+	Food * CreateFood(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 
 	//--- Destroy ---
 	void DestroyCharacter(Ogre::String const pName);
 
-	void DestroyDeraumere(Ogre::String const pName);
-	void DestroyLinemate(Ogre::String const pName);
-	void DestroyMendiane(Ogre::String const pName);
-	void DestroyPhiras(Ogre::String const pName);
-	void DestroySibur(Ogre::String const pName);
-	void DestroyThystame(Ogre::String const pName);
+	void DestroyDeraumere(int pX, int pY);
+	void DestroyLinemate(int pX, int pY);
+	void DestroyMendiane(int pX, int pY);
+	void DestroyPhiras(int pX, int pY);
+	void DestroySibur(int pX, int pY);
+	void DestroyThystame(int pX, int pY);
+	void DestroyFood(int pX, int pY);
 
 private:
-	ObjectFactory();
 };
 
 #endif // !OBJECTFACTORY_HPP

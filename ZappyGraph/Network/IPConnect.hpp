@@ -9,8 +9,8 @@ public:
 	IPConnect();
 	~IPConnect();
 
-	Ogre::String const & getIP() const;
-	int const & getPort() const;
+	Ogre::String const getIP() const;
+	int const getPort() const;
 
 	Ogre::String	ipPort;
 

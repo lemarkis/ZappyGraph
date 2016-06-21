@@ -1,6 +1,6 @@
 #include "Food.hpp"
 
-Food::Food(Ogre::Entity * pEntity, Ogre::SceneNode * pNode) : AObject()
+Food::Food(Ogre::Entity * pEntity, Ogre::SceneNode * pNode)
 {
 	entity = pEntity;
 	node = pNode;

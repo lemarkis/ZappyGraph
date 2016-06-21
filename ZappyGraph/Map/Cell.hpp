@@ -2,7 +2,9 @@
 #define CELL_HPP
 
 #include <Ogre.h>
-#include "Object\Character\Character.hpp"
+#include <stack>
+
+#include "Object\Food\Food.hpp"
 #include "Object\Gear\Deraumere.hpp"
 #include "Object\Gear\Linemate.hpp"
 #include "Object\Gear\Mendiane.hpp"
@@ -18,11 +20,18 @@ public:
 	Cell(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 	~Cell();
 
+	Ogre::SceneNode * getNode() const;
+	std::stack<Deraumere*> _deraumere;
+	std::stack<Linemate*> _linemate;
+	std::stack<Mendiane*> _mendiane;
+	std::stack<Phiras*> _phiras;
+	std::stack<Sibur*> _sibur;
+	std::stack<Thystame*> _thystame;
+	std::stack<Food*> _food;
+
 protected:
 	Ogre::SceneNode * node;
-	int x;
-	int y;
-
+	
 };
 
 #endif // !CELL_HPP
