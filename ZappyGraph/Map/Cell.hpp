@@ -4,6 +4,7 @@
 #include <Ogre.h>
 #include <stack>
 
+#include "Object\ObjectFactory.hpp"
 #include "Object\Food\Food.hpp"
 #include "Object\Gear\Deraumere.hpp"
 #include "Object\Gear\Linemate.hpp"
@@ -11,8 +12,6 @@
 #include "Object\Gear\Phiras.hpp"
 #include "Object\Gear\Sibur.hpp"
 #include "Object\Gear\Thystame.hpp"
-
-#define SIZE_CELL 2
 
 class Cell
 {

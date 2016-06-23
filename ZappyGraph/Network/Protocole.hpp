@@ -18,6 +18,7 @@ public:
 	bool getSizeMap(std::stringstream & msg);
 	bool getTimeUnit(std::stringstream & msg);
 	bool getTeamName(std::stringstream & msg);
+	bool getCellRes(std::stringstream & msg);
 	bool newPlayer(std::stringstream & msg);
 	bool getPlayerPos(std::stringstream & msg);
 	bool getPlayerLvl(std::stringstream & msg);

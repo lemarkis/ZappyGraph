@@ -18,3 +18,8 @@ void Character::setAnimation(Ogre::String const & pAnimName)
 	activeAnimation->setLoop(true);
 	activeAnimation->setEnabled(true);
 }
+
+Ogre::Vector2 const Character::getPosition() const
+{
+	return Ogre::Vector2(node->getPosition().x / SIZE_CELL, node->getPosition().z / SIZE_CELL);
+}

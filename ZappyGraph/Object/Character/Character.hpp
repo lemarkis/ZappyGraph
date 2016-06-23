@@ -11,6 +11,7 @@ public:
 	~Character();
 
 	void setAnimation(Ogre::String const & pAnimName);
+	Ogre::Vector2 const getPosition() const;
 
 protected:
 	Ogre::AnimationState * activeAnimation;

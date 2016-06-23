@@ -7,6 +7,7 @@ Protocole::Protocole()
 	funcMap["msz"] = &Protocole::getSizeMap;
 	funcMap["sgt"] = &Protocole::getTimeUnit;
 	funcMap["tna"] = &Protocole::getTeamName;
+	funcMap["bct"] = &Protocole::getCellRes;
 	funcMap["pnw"] = &Protocole::newPlayer;
 	funcMap["ppo"] = &Protocole::getPlayerPos;
 	funcMap["piv"] = &Protocole::getPlayerPos;
@@ -52,9 +53,9 @@ bool Protocole::getSizeMap(std::stringstream & msg)
 {
 	int x, y;
 	msg >> x >> y;
-	Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
 	if (World::getSingletonPtr() == nullptr)
 	{
+		Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
 		OgreFramework::getSingletonPtr()->m_pLog->logMessage("Creating Map...");
 		new World(sceneMgr, x, y);
 		OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Map ").append(std::to_string(x)).append("x").append(std::to_string(y)).append(" created."));
@@ -71,6 +72,7 @@ bool Protocole::getTimeUnit(std::stringstream & msg)
 {
 	int unitTime;
 	msg >> unitTime;
+	//TODO do something with this method
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Unit Time: ").append(std::to_string(unitTime)));
 	return false;
 }
@@ -80,7 +82,35 @@ bool Protocole::getTeamName(std::stringstream & msg)
 {
 	Ogre::String teamName;
 	msg >> teamName;
+	//TODO do somthing with this method
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Team name: ").append(teamName));
+	return false;
+}
+
+// bct X Y q q q q q q q\n
+bool Protocole::getCellRes(std::stringstream & msg)
+{
+	int x, y, f, l, d, s, m, p, t;
+	msg >> x >> y >> f >> l >> d >> s >> m >> p >> t;
+	Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
+	Cell * cell = World::getSingletonPtr()->getCell(x, y);
+	/*while (cell->_food.size() < f)
+		ObjectFactory::getSingletonPtr()->CreateFood(sceneMgr, x, y);
+	while (cell->_linemate.size() < l)
+		ObjectFactory::getSingletonPtr()->CreateLinemate(sceneMgr, x, y);
+	while (cell->_deraumere.size() < d)
+		ObjectFactory::getSingletonPtr()->CreateDeraumere(sceneMgr, x, y);
+	while (cell->_sibur.size() < s)
+		ObjectFactory::getSingletonPtr()->CreateSibur(sceneMgr, x, y);
+	while (cell->_mendiane.size() < m)
+		ObjectFactory::getSingletonPtr()->CreateMendiane(sceneMgr, x, y);
+	while (cell->_phiras.size() < p)
+		ObjectFactory::getSingletonPtr()->CreatePhiras(sceneMgr, x, y);
+	while (cell->_thystame.size() < t)
+		ObjectFactory::getSingletonPtr()->CreateThystame(sceneMgr, x, y);*/
+	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Cell: ").append(std::to_string(x)).append(";").append(std::to_string(y)).append(" ")
+		.append(std::to_string(f)).append(" ").append(std::to_string(l)).append(" ").append(std::to_string(d)).append(" ").append(std::to_string(s)).append(" ")
+		.append(std::to_string(m)).append(" ").append(std::to_string(p)).append(" ").append(std::to_string(t)));
 	return false;
 }
 
@@ -91,7 +121,7 @@ bool Protocole::newPlayer(std::stringstream & msg)
 	int n, x, y, o, l;
 	msg >> n >> x >> y >> o >> l >> teamName;
 	Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
-	ObjectFactory::getSingletonPtr()->CreateCharacter(sceneMgr, x, y, o, teamName, n);
+	/*ObjectFactory::getSingletonPtr()->CreateCharacter(sceneMgr, x, y, o, teamName, n);*/
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Creating player: ").append(std::to_string(n)).append(" ")
 		.append(std::to_string(x)).append(" ").append(std::to_string(y)).append(" ").append(std::to_string(o)));
 	return false;
@@ -102,6 +132,7 @@ bool Protocole::getPlayerPos(std::stringstream & msg)
 {
 	int x, y, o, n;
 	msg >> n >> x >> y >> o;
+	//TODO do something with this methode
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Player position: ").append(std::to_string(n)).append(" ")
 		.append(std::to_string(x)).append(" ").append(std::to_string(y)).append(" ").append(std::to_string(o)));
 	return false;
@@ -112,16 +143,18 @@ bool Protocole::getPlayerLvl(std::stringstream & msg)
 {
 	int n, l;
 	msg >> n >> l;
+	//TODO do something with this method
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Player level: ").append(std::to_string(n)).append(" ")
 		.append(std::to_string(l)));
 	return false;
 }
 
-// pin # X Y q q q q q q q\n
+// pin #n X Y q q q q q q q\n
 bool Protocole::getPlayerInv(std::stringstream & msg)
 {
 	int n, x, y, f, l, d, s, m, p, t;
 	msg >> n >> x >> y >> f >> l >> d >> s >> m >> p >> t;
+	//TODO do something with this method
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Player inventaire: ").append(std::to_string(n)).append(" ")
 		.append(std::to_string(f)).append(std::to_string(l)).append(" ").append(std::to_string(d)).append(" ").append(std::to_string(s)).append(" ")
 		.append(std::to_string(m)).append(" ").append(std::to_string(p)).append(" ").append(std::to_string(t)));
@@ -133,7 +166,9 @@ bool Protocole::playerExpls(std::stringstream & msg)
 {
 	int n;
 	msg >> n;
-	//TODO get joueur pour animation
+	//TODO comment
+	/*Character * drone = World::getSingletonPtr()->getDrone(std::to_string(n));
+	drone->setAnimation("expulse");*/
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Player expulse: ").append(std::to_string(n)));
 	return false;
 }
@@ -154,6 +189,7 @@ bool Protocole::playerInct(std::stringstream & msg)
 {
 	int x, y, l, n, n2, n3, n4, n5, n6;
 	msg >> x >> y >> l >> n >> n2 >> n3 >> n4 >> n5 >> n6;
+	//TODO animation
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Player incantation: ").append(std::to_string(x)).append(";").append(std::to_string(y))
 		.append(" ").append(std::to_string(n)).append(" ").append(std::to_string(n2)).append(" ").append(std::to_string(n3))
 		.append(" ").append(std::to_string(n4)).append(" ").append(std::to_string(n5)).append(" ").append(std::to_string(n6)));
@@ -165,13 +201,16 @@ bool Protocole::inctEnd(std::stringstream & msg)
 {
 	int x, y, r;
 	msg >> x >> y >> r;
-
+	//TODO animation
 	return false;
 }
 
 // pfk #n\n
 bool Protocole::playerFork(std::stringstream & msg)
 {
+	int n;
+	msg >> n;
+	//TODO do something with this method
 	return false;
 }
 
@@ -255,6 +294,11 @@ bool Protocole::playerDie(std::stringstream & msg)
 // enw #e #n X Y\n
 bool Protocole::eggSpawn(std::stringstream & msg)
 {
+	int e, n, x, y;
+	msg >> e >> n >> x >> y;
+	Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
+	Character * drone = World::getSingletonPtr()->getDrone(std::to_string(n));
+	ObjectFactory::getSingletonPtr()->CreateEgg(sceneMgr, drone->getPosition().x, drone->getPosition().y, e);
 	return false;
 }
 

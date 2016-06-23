@@ -1,7 +1,7 @@
 #ifndef SOCKET_HPP_
 #define SOCKET_HPP_
 
-#if OGRE_PLATFORM == PLATFORM_WIN32 || OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+#ifdef _WIN32
 
 #include <WinSock2.h>
 #pragma comment(lib, "Ws2_32.lib")
@@ -51,8 +51,8 @@ public:
 	void socketBind() const;
 	void socketListen(int nb) const;
 	int socketAccept() const;
-	int socketRead(int, std::string &);
-	int socketRead(std::string &);
+	int socketRead(int, std::string &, size_t const size = 4096);
+	int socketRead(std::string &, size_t const size = 4096);
 	void socketClose(int) const;
 	void socketClose();
 	void socketConnect() const;

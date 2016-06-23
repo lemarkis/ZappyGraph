@@ -34,3 +34,27 @@ Cell * World::getCell(int const pX, int const pY) const
 {
 	return _map[pY][pX];
 }
+
+Character * World::getDrone(Ogre::String const & pName) const
+{
+	for (std::vector<Character*>::const_iterator it = drones.begin(); it != drones.end(); ++it)
+	{
+		if ((*it)->getNode()->getName() == pName)
+		{
+			return *it;
+		}
+	}
+	return nullptr;
+}
+
+Egg * World::getEgg(Ogre::String const & pName) const
+{
+	for (std::vector<Egg*>::const_iterator it = eggs.end(); it != eggs.end(); it++)
+	{
+		if ((*it)->getNode()->getName() == pName)
+		{
+			return *it;
+		}
+	}
+	return nullptr;
+}

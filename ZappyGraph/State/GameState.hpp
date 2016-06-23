@@ -7,6 +7,7 @@
 #include "Framework\AppState.hpp"
 #include "Network\Socket.hpp"
 #include "Network\Protocole.hpp"
+#include "Network\CircularBuffer.hpp"
 
 class GameState : public AppState
 {
@@ -44,6 +45,8 @@ private:
 	Ogre::Camera * camera;
 
 	Socket * socket;
+	bool socketOK;
+	CircularBuffer * cb_read;
 	fd_set fd_read, fd_write;
 
 };

@@ -10,12 +10,26 @@ ObjectFactory::~ObjectFactory()
 
 Character * ObjectFactory::CreateCharacter(Ogre::SceneManager * pSceneMgr, int pX, int pY, int pOrientation, Ogre::String pTeamName, int pNumJoueur)
 {
-	Ogre::String name = Ogre::String(pTeamName).append(std::to_string(pNumJoueur));
+	/*pTeamName).append(*/
+	Ogre::String name = Ogre::String(std::to_string(pNumJoueur));
 	Ogre::Entity * entity = pSceneMgr->createEntity(name, "Drone.mesh");
 	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode(name);
 	//TODO rotation en fonction du mesh
 	World::getSingletonPtr()->getCell(pX, pY)->getNode()->addChild(node);
-	return new Character(name, entity, node);
+	Character * drone = new Character(name, entity, node);
+	World::getSingletonPtr()->drones.push_back(drone);
+	return drone;
+}
+
+Egg * ObjectFactory::CreateEgg(Ogre::SceneManager * pSceneMgr, int pX, int pY, int pNumEgg)
+{
+	Ogre::String name = Ogre::String(std::to_string(pNumEgg));
+	Ogre::Entity * entity = pSceneMgr->createEntity(name, "Egg.mesh");
+	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode(name);
+	World::getSingletonPtr()->getCell(pX, pY)->getNode()->addChild(node);
+	Egg * egg = new Egg(name, entity, node);
+	World::getSingletonPtr()->eggs.push_back(egg);
+	return egg;
 }
 
 Deraumere * ObjectFactory::CreateDeraumere(Ogre::SceneManager * pSceneMgr, int pX, int pY)

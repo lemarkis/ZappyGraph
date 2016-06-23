@@ -3,6 +3,9 @@
 GameState::GameState()
 {
 	quit = false;
+	socketOK = false;
+	socket = nullptr;
+	cb_read = nullptr;
 	frameEvent = Ogre::FrameEvent();
 }
 
@@ -36,14 +39,18 @@ void GameState::enter()
 		delete socket;
 		socket = nullptr;
 		changeAppState(findByName("MenuState"));
+		return;
 	}
-
+	
+	cb_read = new CircularBuffer(8192);
 	new ObjectFactory();
 	new Protocole();
 
     buildGUI();
 
     createScene();
+
+	socketOK = true;
 }
 
 bool GameState::pause()
@@ -76,6 +83,7 @@ void GameState::exit()
 		delete socket;
 		socket = nullptr;
 	}
+	delete cb_read;
 	delete Protocole::getSingletonPtr();
 	delete ObjectFactory::getSingletonPtr();
 }
@@ -86,13 +94,17 @@ void GameState::createScene()
 
 	Ogre::String msg;
 	socket->socketRead(msg);
-	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(msg.substr(0, msg.size() - 1)));
+	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [RAW Internet] : ").append(msg));
+	//OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(msg.substr(0, msg.size() - 1)));
 	if (socket->socketWrite("GRAPHIC\n") <= 0)
 	{
 		socket->socketClose();
 		changeAppState(findByName("MenuState"));
 	}
-	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String(">>> [Internet] : ").append("GRAPHIC"));
+	else
+	{
+		OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String(">>> [Internet] : ").append("GRAPHIC\\n"));
+	}
 }
 
 bool GameState::keyPressed(const OIS::KeyEvent &keyEventRef)
@@ -114,6 +126,7 @@ bool GameState::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool GameState::mouseMoved(const OIS::MouseEvent &evt)
 {
+	if (OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt)) return true;
 	return true;
 }
 
@@ -145,24 +158,36 @@ void GameState::getInput()
 void GameState::update(double timeSinceLastFrame)
 {
     m_FrameEvent.timeSinceLastFrame = timeSinceLastFrame;
-
+	
     if(quit == true)
     {
         popAppState();
         return;
     }
-
-	socket->socketFD_ZERO(&fd_read);
-	socket->socketFD_ZERO(&fd_write);
-	socket->socketFD_SET(&fd_read);
-	socket->socketFD_SET(&fd_write);
-	socket->socketSelect(&fd_read, &fd_write);
-	if (FD_ISSET(socket->getSock(), &fd_read))
+	
+	if (socketOK)
 	{
-		Ogre::String msg;
-		socket->socketRead(msg);
-		OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(msg.substr(0, msg.size() - 1)));
-		quit = Protocole::getSingletonPtr()->parseMsg(msg);
+		socket->socketFD_ZERO(&fd_read);
+		socket->socketFD_ZERO(&fd_write);
+		socket->socketFD_SET(&fd_read);
+		socket->socketFD_SET(&fd_write);
+		socket->socketSelect(&fd_read, &fd_write);
+		if (!cb_read->isFull())
+		{
+			if (FD_ISSET(socket->getSock(), &fd_read))
+			{
+				Ogre::String msg;
+				socket->socketRead(msg, cb_read->getEmptySize());
+				OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [RAW Internet] : ").append(msg));
+				cb_read->putInBuffer(msg);
+			}
+		}
+		else
+		{
+			Ogre::String cmd(cb_read->getLine());
+			OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(cmd));
+			quit = Protocole::getSingletonPtr()->parseMsg(cmd);
+		}
 	}
 
     getInput();

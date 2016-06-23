@@ -30,7 +30,7 @@ void SplashScreenState::enter()
 
 	OgreFramework::getSingletonPtr()->m_pTrayMgr->destroyAllWidgets();
 
-	//new ObjectCache(m_pSceneMgr);
+	new ObjectCache(m_pSceneMgr);
 
 	Ogre::OverlayElement * btn = OgreFramework::getSingletonPtr()->m_pTrayMgr->createButton(OgreBites::TL_NONE, "SplashBtn", "Press Enter to continue...", 250)->getOverlayElement();
 	btn->setPosition(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) * 50 / 100 - 125,

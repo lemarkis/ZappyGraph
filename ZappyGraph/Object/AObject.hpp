@@ -3,6 +3,8 @@
 
 #include <Ogre.h>
 
+#define SIZE_CELL 2
+
 class AObject
 {
 public:

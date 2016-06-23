@@ -4,7 +4,7 @@ Socket::Socket(std::string const & _ip, int port)
 {
 	struct protoent *proto;
 
-#ifdef _WIN32 || WIN32
+#ifdef _WIN32
 	WSADATA wsaData;
 	int iResult;
 
@@ -58,33 +58,33 @@ int Socket::socketAccept() const
 	return fd;
 }
 
-int Socket::socketRead(int fd, std::string &buff)
+int Socket::socketRead(int fd, std::string &buff, size_t const size)
 {
-	char test[4096];
-	int rd = recv(fd, test, 4096, 0);
+	char * test = new char[size];
+	memset(test, 0, size);	
+	int rd = recv(fd, test, size - 1, 0);
 	if (rd <= 0)
 		return -1;
 	test[rd] = 0;
-	std::string tmp(test);
-	buff = tmp;
+	buff = test;
 	return rd;
 }
 
-int Socket::socketRead(std::string &buff)
+int Socket::socketRead(std::string &buff, size_t const size)
 {
-	char test[4096];
-	int rd = recv(sock, test, 4095, 0);
+	char * test = new char[size];
+	memset(test, 0, size);
+	int rd = recv(sock, test, size - 1, 0);
 	if (rd <= 0)
 		return -1;
 	test[rd] = 0;
-	std::string tmp(test);
-	buff = tmp;
+	buff = test;
 	return rd;
 }
 
 void Socket::socketClose(int fd) const
 {
-#ifdef _WIN32 || WIN32
+#ifdef _WIN32
 	closesocket(fd);
 #else
 	close(fd);
@@ -93,7 +93,7 @@ void Socket::socketClose(int fd) const
 
 void Socket::socketClose()
 {
-#ifdef _WIN32 || WIN32
+#ifdef _WIN32
 	closesocket(sock);
 #else
 	close(sock);

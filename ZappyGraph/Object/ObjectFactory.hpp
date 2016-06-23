@@ -3,12 +3,14 @@
 
 #include "Map\World.hpp"
 #include "Object\Character\Character.hpp"
+#include "Object\Egg\Egg.hpp"
 #include "Object\Gear\Deraumere.hpp"
 #include "Object\Gear\Linemate.hpp"
 #include "Object\Gear\Mendiane.hpp"
 #include "Object\Gear\Phiras.hpp"
 #include "Object\Gear\Sibur.hpp"
 #include "Object\Gear\Thystame.hpp"
+#include "Object\Food\Food.hpp"
 
 class ObjectFactory : public Ogre::Singleton<ObjectFactory>
 {
@@ -17,7 +19,9 @@ public:
 	~ObjectFactory();
 
 	//--- Create ---
+
 	Character * CreateCharacter(Ogre::SceneManager * pSceneMgr, int pX, int pY, int pOrientation, Ogre::String pTeamName, int pNumJoueur);
+	Egg * CreateEgg(Ogre::SceneManager * pSceneMgr, int pX, int pY, int pNumEgg);
 
 	Deraumere * CreateDeraumere(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 	Linemate * CreateLinemate(Ogre::SceneManager * pSceneMgr, int pX, int pY);
@@ -28,6 +32,7 @@ public:
 	Food * CreateFood(Ogre::SceneManager * pSceneMgr, int pX, int pY);
 
 	//--- Destroy ---
+
 	void DestroyCharacter(Ogre::String const pName);
 
 	void DestroyDeraumere(int pX, int pY);
