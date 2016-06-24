@@ -94,7 +94,7 @@ bool Protocole::getCellRes(std::stringstream & msg)
 	msg >> x >> y >> f >> l >> d >> s >> m >> p >> t;
 	Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
 	Cell * cell = World::getSingletonPtr()->getCell(x, y);
-	/*while (cell->_food.size() < f)
+	while (cell->_food.size() < f)
 		ObjectFactory::getSingletonPtr()->CreateFood(sceneMgr, x, y);
 	while (cell->_linemate.size() < l)
 		ObjectFactory::getSingletonPtr()->CreateLinemate(sceneMgr, x, y);
@@ -107,7 +107,7 @@ bool Protocole::getCellRes(std::stringstream & msg)
 	while (cell->_phiras.size() < p)
 		ObjectFactory::getSingletonPtr()->CreatePhiras(sceneMgr, x, y);
 	while (cell->_thystame.size() < t)
-		ObjectFactory::getSingletonPtr()->CreateThystame(sceneMgr, x, y);*/
+		ObjectFactory::getSingletonPtr()->CreateThystame(sceneMgr, x, y);
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Cell: ").append(std::to_string(x)).append(";").append(std::to_string(y)).append(" ")
 		.append(std::to_string(f)).append(" ").append(std::to_string(l)).append(" ").append(std::to_string(d)).append(" ").append(std::to_string(s)).append(" ")
 		.append(std::to_string(m)).append(" ").append(std::to_string(p)).append(" ").append(std::to_string(t)));
@@ -121,7 +121,7 @@ bool Protocole::newPlayer(std::stringstream & msg)
 	int n, x, y, o, l;
 	msg >> n >> x >> y >> o >> l >> teamName;
 	Ogre::SceneManager * sceneMgr = OgreFramework::getSingletonPtr()->m_pRoot->getSceneManager("GameSceneMgr");
-	/*ObjectFactory::getSingletonPtr()->CreateCharacter(sceneMgr, x, y, o, teamName, n);*/
+	ObjectFactory::getSingletonPtr()->CreateCharacter(sceneMgr, x, y, o, teamName, n);
 	OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("Creating player: ").append(std::to_string(n)).append(" ")
 		.append(std::to_string(x)).append(" ").append(std::to_string(y)).append(" ").append(std::to_string(o)));
 	return false;

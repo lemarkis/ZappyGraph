@@ -18,6 +18,8 @@ private:
 	Ogre::Entity * mendiane;
 	Ogre::Entity * phiras;
 	Ogre::Entity * thystame;
+	Ogre::Entity * food;
+	Ogre::Entity * egg;
 };
 
 #endif // !OBJECTCACHE_HPP

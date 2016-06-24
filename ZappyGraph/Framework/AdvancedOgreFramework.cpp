@@ -38,7 +38,7 @@ bool OgreFramework::initOgre(Ogre::String wndTitle, OIS::KeyListener *pKeyListen
     m_pRenderWnd = m_pRoot->initialise(true, wndTitle);
 
     m_pViewport = m_pRenderWnd->addViewport(0);
-    m_pViewport->setBackgroundColour(Ogre::ColourValue(0.3f, 0.3f, 0.3f, 1.0f));
+    m_pViewport->setBackgroundColour(Ogre::ColourValue(0.f, 0.f, 0.f, 1.0f));
 
     m_pViewport->setCamera(0);
 

@@ -46,7 +46,7 @@ std::string const CircularBuffer::getLine()
 	for (i = start; (i < size || i < end) && buffer[i] != '\n'; ++i);
 	if (buffer[i] == '\n')
 	{
-		start = i == size ? 0 : i + 1;
+		start = i == size ? 0 : i;
 		if (i == end)
 		{
 			start = 0;
@@ -57,7 +57,7 @@ std::string const CircularBuffer::getLine()
 	else if (i == end)
 		return std::string("");
 	else
-		return getLine(std::string(&buffer[start], i + 1 - start));
+		return getLine(std::string(&buffer[start], i - start));
 }
 
 //retourne la taille utilise du buffer
@@ -102,7 +102,7 @@ std::string const CircularBuffer::getLine(std::string beginStr)
 			start = 0;
 			end = 0;
 		}
-		return beginStr.append(buffer, i + 1);
+		return beginStr.append(buffer, i);
 	}
 	return std::string("");
 }

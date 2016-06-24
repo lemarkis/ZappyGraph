@@ -56,6 +56,7 @@ void MenuState::createScene()
 
 
 	delete ObjectFactory::getSingletonPtr();
+	delete World::getSingletonPtr();
 }
 
 void MenuState::exit()
