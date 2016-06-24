@@ -49,6 +49,12 @@ private:
 	CircularBuffer * cb_read;
 	fd_set fd_read, fd_write;
 
+	Ogre::Vector3				m_TranslateVector;
+	Ogre::Real					m_MoveSpeed;
+	Ogre::Degree				m_RotateSpeed;
+	float						m_MoveScale;
+	Ogre::Degree				m_RotScale;
+
 };
 
 #endif

@@ -1,8 +1,10 @@
 #ifndef MENU_STATE_HPP
 #define MENU_STATE_HPP
 
-#include "Framework\AppState.hpp"
 #include <regex>
+
+#include "Framework\AppState.hpp"
+#include "Object\ObjectFactory.hpp"
 
 class MenuState : public AppState
 {

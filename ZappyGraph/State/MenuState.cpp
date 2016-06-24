@@ -16,8 +16,8 @@ void MenuState::enter()
     m_pSceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
 
     m_pCamera = m_pSceneMgr->createCamera("MenuCam");
-    m_pCamera->setPosition(Ogre::Vector3(0, 25, -50));
-    m_pCamera->lookAt(Ogre::Vector3(0, 0, 0));
+    m_pCamera->setPosition(Ogre::Vector3(-3, 2, -3));
+    m_pCamera->lookAt(Ogre::Vector3(1, 0, 0));
     m_pCamera->setNearClipDistance(1);
 
     m_pCamera->setAspectRatio(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) /
@@ -42,6 +42,20 @@ void MenuState::enter()
 
 void MenuState::createScene()
 {
+	new ObjectFactory();
+	new World(m_pSceneMgr, 1, 1);
+	
+	ObjectFactory::getSingletonPtr()->CreateCharacter(m_pSceneMgr, 0, 0, 1, "Menu", 0);
+
+	ObjectFactory::getSingletonPtr()->CreateLinemate(m_pSceneMgr, 0, 0);
+	ObjectFactory::getSingletonPtr()->CreateDeraumere(m_pSceneMgr, 0, 0);
+	ObjectFactory::getSingletonPtr()->CreateSibur(m_pSceneMgr, 0, 0);
+	ObjectFactory::getSingletonPtr()->CreateMendiane(m_pSceneMgr, 0, 0);
+	ObjectFactory::getSingletonPtr()->CreatePhiras(m_pSceneMgr, 0, 0);
+	ObjectFactory::getSingletonPtr()->CreateThystame(m_pSceneMgr, 0, 0);
+
+
+	delete ObjectFactory::getSingletonPtr();
 }
 
 void MenuState::exit()

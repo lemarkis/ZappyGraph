@@ -67,6 +67,7 @@ int Socket::socketRead(int fd, std::string &buff, size_t const size)
 		return -1;
 	test[rd] = 0;
 	buff = test;
+	delete test;
 	return rd;
 }
 
@@ -79,6 +80,7 @@ int Socket::socketRead(std::string &buff, size_t const size)
 		return -1;
 	test[rd] = 0;
 	buff = test;
+	delete test;
 	return rd;
 }
 

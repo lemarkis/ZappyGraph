@@ -3,9 +3,13 @@
 Character::Character(Ogre::String const pName, Ogre::Entity * pEntity, Ogre::SceneNode * pNode) : AObject(pName)
 {
 	entity = pEntity;
-	node = pNode;
+	node = pNode->createChildSceneNode();
 	node->attachObject(entity);
-	setAnimation("idle");
+	node->setScale(.4, .4, .4);
+	node->setPosition(0, 0, -.25);
+	node->setOrientation(Ogre::Quaternion(Ogre::Degree(180), Ogre::Vector3(0, 1, 0)));
+	node = pNode;
+	/*setAnimation("idle");*/
 }
 
 Character::~Character()

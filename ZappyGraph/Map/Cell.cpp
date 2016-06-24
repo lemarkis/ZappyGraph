@@ -7,6 +7,7 @@ Cell::Cell(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 	Ogre::Entity * gEntity = pSceneMgr->createEntity("Ground.mesh");
 	Ogre::SceneNode * gNode = node->createChildSceneNode();
 	/*node->addChild(gNode);*/
+	gNode->attachObject(gEntity);
 }
 
 Cell::~Cell()

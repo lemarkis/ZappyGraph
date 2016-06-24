@@ -7,6 +7,9 @@ GameState::GameState()
 	socket = nullptr;
 	cb_read = nullptr;
 	frameEvent = Ogre::FrameEvent();
+
+	m_MoveSpeed = 0.1f;
+	m_RotateSpeed = 0.3f;
 }
 
 void GameState::enter()
@@ -19,9 +22,9 @@ void GameState::enter()
 	sceneMgr->addRenderQueueListener(OgreFramework::getSingletonPtr()->m_pOverlaySystem);
 
     camera = sceneMgr->createCamera("GameCamera");
-    camera->setPosition(Ogre::Vector3(5, 60, 60));
-    camera->lookAt(Ogre::Vector3(5, 20, 0));
-    camera->setNearClipDistance(5);
+    camera->setPosition(Ogre::Vector3(0, 20, 20));
+    camera->lookAt(Ogre::Vector3(0, 0, 0));
+    camera->setNearClipDistance(2);
 
     camera->setAspectRatio(Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualWidth()) /
         Ogre::Real(OgreFramework::getSingletonPtr()->m_pViewport->getActualHeight()));
@@ -90,7 +93,7 @@ void GameState::exit()
 
 void GameState::createScene()
 {
-    sceneMgr->createLight("Light")->setPosition(75,75,75);
+    sceneMgr->createLight("Light")->setPosition(0,75,0);
 
 	Ogre::String msg;
 	socket->socketRead(msg);
@@ -126,7 +129,11 @@ bool GameState::keyReleased(const OIS::KeyEvent &keyEventRef)
 
 bool GameState::mouseMoved(const OIS::MouseEvent &evt)
 {
-	if (OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt)) return true;
+	//if (OgreFramework::getSingletonPtr()->m_pTrayMgr->injectMouseMove(evt)) return true;
+
+	camera->yaw(Ogre::Degree(evt.state.X.rel * -0.1f));
+	camera->pitch(Ogre::Degree(evt.state.Y.rel * -0.1f));
+
 	return true;
 }
 
@@ -147,12 +154,30 @@ void GameState::onLeftPressed(const OIS::MouseEvent &evt)
 
 void GameState::moveCamera()
 {
-
+	camera->move(m_TranslateVector * .5);
 }
 
 void GameState::getInput()
 {
+	//Camera
+	OIS::Keyboard *lKeyboard = OgreFramework::getSingletonPtr()->m_pKeyboard;
+	if (lKeyboard->isKeyDown(OIS::KC_A))
+		m_TranslateVector.x = -m_MoveScale;
 
+	if (lKeyboard->isKeyDown(OIS::KC_D))
+		m_TranslateVector.x = m_MoveScale;
+
+	if (lKeyboard->isKeyDown(OIS::KC_W))
+		m_TranslateVector.z = -m_MoveScale;
+
+	if (lKeyboard->isKeyDown(OIS::KC_S))
+		m_TranslateVector.z = m_MoveScale;
+
+	if (lKeyboard->isKeyDown(OIS::KC_Q))
+		m_TranslateVector.y = -m_MoveScale;
+
+	if (lKeyboard->isKeyDown(OIS::KC_E))
+		m_TranslateVector.y = m_MoveScale;
 }
 
 void GameState::update(double timeSinceLastFrame)
@@ -167,13 +192,13 @@ void GameState::update(double timeSinceLastFrame)
 	
 	if (socketOK)
 	{
-		socket->socketFD_ZERO(&fd_read);
-		socket->socketFD_ZERO(&fd_write);
-		socket->socketFD_SET(&fd_read);
-		socket->socketFD_SET(&fd_write);
-		socket->socketSelect(&fd_read, &fd_write);
 		if (!cb_read->isFull())
 		{
+			socket->socketFD_ZERO(&fd_read);
+			socket->socketFD_ZERO(&fd_write);
+			socket->socketFD_SET(&fd_read);
+			socket->socketFD_SET(&fd_write);
+			socket->socketSelect(&fd_read, &fd_write);
 			if (FD_ISSET(socket->getSock(), &fd_read))
 			{
 				Ogre::String msg;
@@ -182,13 +207,18 @@ void GameState::update(double timeSinceLastFrame)
 				cb_read->putInBuffer(msg);
 			}
 		}
-		else
+		if (cb_read->getSize() > 0)
 		{
 			Ogre::String cmd(cb_read->getLine());
 			OgreFramework::getSingletonPtr()->m_pLog->logMessage(Ogre::String("<<< [Internet] : ").append(cmd));
 			quit = Protocole::getSingletonPtr()->parseMsg(cmd);
 		}
 	}
+
+	m_MoveScale = m_MoveSpeed   * timeSinceLastFrame;
+	m_RotScale = m_RotateSpeed * timeSinceLastFrame;
+
+	m_TranslateVector = Ogre::Vector3::ZERO;
 
     getInput();
     moveCamera();

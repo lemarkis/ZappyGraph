@@ -13,9 +13,8 @@ Character * ObjectFactory::CreateCharacter(Ogre::SceneManager * pSceneMgr, int p
 	/*pTeamName).append(*/
 	Ogre::String name = Ogre::String(std::to_string(pNumJoueur));
 	Ogre::Entity * entity = pSceneMgr->createEntity(name, "Drone.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode(name);
+	Ogre::SceneNode * node = World::getSingletonPtr()->getCell(pX, pY)->getNode()->createChildSceneNode(name);
 	//TODO rotation en fonction du mesh
-	World::getSingletonPtr()->getCell(pX, pY)->getNode()->addChild(node);
 	Character * drone = new Character(name, entity, node);
 	World::getSingletonPtr()->drones.push_back(drone);
 	return drone;
@@ -24,9 +23,8 @@ Character * ObjectFactory::CreateCharacter(Ogre::SceneManager * pSceneMgr, int p
 Egg * ObjectFactory::CreateEgg(Ogre::SceneManager * pSceneMgr, int pX, int pY, int pNumEgg)
 {
 	Ogre::String name = Ogre::String(std::to_string(pNumEgg));
-	Ogre::Entity * entity = pSceneMgr->createEntity(name, "Egg.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode(name);
-	World::getSingletonPtr()->getCell(pX, pY)->getNode()->addChild(node);
+	Ogre::Entity * entity = pSceneMgr->createEntity(name, "Oeuf.mesh");
+	Ogre::SceneNode * node = World::getSingletonPtr()->getCell(pX, pY)->getNode()->createChildSceneNode(name);
 	Egg * egg = new Egg(name, entity, node);
 	World::getSingletonPtr()->eggs.push_back(egg);
 	return egg;
@@ -35,9 +33,8 @@ Egg * ObjectFactory::CreateEgg(Ogre::SceneManager * pSceneMgr, int pX, int pY, i
 Deraumere * ObjectFactory::CreateDeraumere(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
 	Ogre::Entity * entity = pSceneMgr->createEntity("Deraumere.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Deraumere * tmp = new Deraumere(entity, node);
 	cell->_deraumere.push(tmp);
 	return tmp;
@@ -46,9 +43,8 @@ Deraumere * ObjectFactory::CreateDeraumere(Ogre::SceneManager * pSceneMgr, int p
 Linemate * ObjectFactory::CreateLinemate(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
 	Ogre::Entity * entity = pSceneMgr->createEntity("Linemate.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Linemate * tmp = new Linemate(entity, node);
 	cell->_linemate.push(tmp);
 	return tmp;
@@ -57,9 +53,8 @@ Linemate * ObjectFactory::CreateLinemate(Ogre::SceneManager * pSceneMgr, int pX,
 Mendiane * ObjectFactory::CreateMendiane(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
 	Ogre::Entity * entity = pSceneMgr->createEntity("Mendiane.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Mendiane * tmp = new Mendiane(entity, node);
 	cell->_mendiane.push(tmp);
 	return tmp;
@@ -68,9 +63,8 @@ Mendiane * ObjectFactory::CreateMendiane(Ogre::SceneManager * pSceneMgr, int pX,
 Phiras * ObjectFactory::CreatePhiras(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
 	Ogre::Entity * entity = pSceneMgr->createEntity("Phiras.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Phiras * tmp = new Phiras(entity, node);
 	cell->_phiras.push(tmp);
 	return tmp;
@@ -79,9 +73,8 @@ Phiras * ObjectFactory::CreatePhiras(Ogre::SceneManager * pSceneMgr, int pX, int
 Sibur * ObjectFactory::CreateSibur(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
 	Ogre::Entity * entity = pSceneMgr->createEntity("Sibur.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Sibur * tmp = new Sibur(entity, node);
 	cell->_sibur.push(tmp);
 	return tmp;
@@ -90,9 +83,8 @@ Sibur * ObjectFactory::CreateSibur(Ogre::SceneManager * pSceneMgr, int pX, int p
 Thystame * ObjectFactory::CreateThystame(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
 	Ogre::Entity * entity = pSceneMgr->createEntity("Thystame.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Thystame * tmp = new Thystame(entity, node);
 	cell->_thystame.push(tmp);
 	return tmp;
@@ -100,10 +92,9 @@ Thystame * ObjectFactory::CreateThystame(Ogre::SceneManager * pSceneMgr, int pX,
 
 Food * ObjectFactory::CreateFood(Ogre::SceneManager * pSceneMgr, int pX, int pY)
 {
-	Ogre::Entity * entity = pSceneMgr->createEntity("Food.mesh");
-	Ogre::SceneNode * node = pSceneMgr->getRootSceneNode()->createChildSceneNode();
+	Ogre::Entity * entity = pSceneMgr->createEntity("Oil.mesh");
 	Cell * cell = World::getSingletonPtr()->getCell(pX, pY);
-	cell->getNode()->addChild(node);
+	Ogre::SceneNode * node = cell->getNode()->createChildSceneNode();
 	Food * tmp = new Food(entity, node);
 	cell->_food.push(tmp);
 	return tmp;

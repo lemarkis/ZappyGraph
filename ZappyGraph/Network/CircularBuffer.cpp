@@ -18,7 +18,7 @@ CircularBuffer::~CircularBuffer()
 //rempli le buffer avec la string, ecrase le debut de la string si plusieurs tour (methode recursive)
 void CircularBuffer::putInBuffer(std::string rawStr)
 {
-	int i = end;
+	int i = end == 0 ? 0 : end + 1;
 	int j = 0;
 	while (i < size && j < rawStr.size())
 	{
@@ -77,11 +77,13 @@ int CircularBuffer::getMaxSize() const
 	return size;
 }
 
+//retourne la taille NON utilise du buffer
 int CircularBuffer::getEmptySize() const
 {
-	return this->getSize() - size;
+	return size - this->getSize();
 }
 
+//retourne true si le buffer est plein, sinon false
 bool CircularBuffer::isFull() const
 {
 	return getSize() == size;
